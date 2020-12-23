@@ -1,8 +1,13 @@
+import Header from './Header';
+
 const App = () => {
   return (
     <div>
-      Hello!
+      <Header />
+      <h1>React</h1>
     </div>
+    // heather
+    // home
   );
 }
 
