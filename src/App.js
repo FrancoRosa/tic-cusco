@@ -1,31 +1,12 @@
 import Header from './Header';
+import Home from './Home';
 
 const App = () => {
   return (
     <div>
       <Header />
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
-      <h1>React</h1>
+      <Home />
     </div>
-    // heather
-    // home
   );
 }
 
