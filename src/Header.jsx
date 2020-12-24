@@ -1,17 +1,57 @@
 import './css/Header.css';
-import logo from './img/logo.png';
+import SearchIcon from '@material-ui/icons/Search';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import LocalMallIcon from '@material-ui/icons/LocalMall';
+
 const Header = () => {
 	return(
 		<div className="header">
-			<img
-				className="header_logo"
-				src={logo}
-				alt="logo"
-			/>
-		<div className="header_search">
-			<input className="header_search_input"/>
-		</div>
-		<div className="header_nav"></div>
+			<h2 className="header_title">
+        <LocalMallIcon className="header_title_icon"/>
+        TIC CUSCO
+      </h2>
+      <div className="header_search">
+        <input className="header_search_input"/>
+        <SearchIcon className="header_search_icon" />
+      </div>
+      <div className="header_nav">
+        <div className="header_option">
+          <span
+            className="header_line_one"
+          >
+            Hello
+          </span>
+          <span
+            className="header_line_two"
+          >
+            Sign in
+          </span>
+        </div>
+        <div className="header_option">
+          <span
+            className="header_line_one"
+          >
+            Retunrs
+          </span>
+          <span
+            className="header_line_two"
+          >
+            & Orders
+          </span>
+        </div>
+        <div className="header_option">
+          <span
+            className="header_line_one"
+          >
+            Your
+          </span>
+          <span
+            className="header_line_two"
+          >
+            Prime
+          </span>
+        </div>
+      </div>
 		</div>
 	);
 };
