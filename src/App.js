@@ -5,6 +5,24 @@ const App = () => {
     <div>
       <Header />
       <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
+      <h1>React</h1>
     </div>
     // heather
     // home

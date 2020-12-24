@@ -8,8 +8,11 @@
   z-index: 100;
 } 
 
-.header_option > span {
+.header_option {
   color: white;
+  display: flex;
+  margin: 0 10px;
+  flex-direction: column;
 }
 
 .header_title {
@@ -43,4 +46,28 @@
   padding: 5px;
   height: 22px !important;
   background-color: #cd9042;
+}
+
+.header_nav {
+  display: flex;
+}
+
+.header_line_one {
+  font-size: 10px;
+}
+
+.header_line_two {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.header_option_basket {
+  color: white;
+  margin: 5px ;
+  display: flex;
+}
+
+.header_count {
+  color: #cd9042;
+  margin: 5px;
 }

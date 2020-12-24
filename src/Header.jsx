@@ -16,40 +16,32 @@ const Header = () => {
       </div>
       <div className="header_nav">
         <div className="header_option">
-          <span
-            className="header_line_one"
-          >
+          <span className="header_line_one">
             Hello
           </span>
-          <span
-            className="header_line_two"
-          >
+          <span className="header_line_two">
             Sign in
           </span>
         </div>
         <div className="header_option">
-          <span
-            className="header_line_one"
-          >
+          <span className="header_line_one">
             Retunrs
           </span>
-          <span
-            className="header_line_two"
-          >
+          <span className="header_line_two">
             & Orders
           </span>
         </div>
         <div className="header_option">
-          <span
-            className="header_line_one"
-          >
+          <span className="header_line_one">
             Your
           </span>
-          <span
-            className="header_line_two"
-          >
+          <span className="header_line_two">
             Prime
           </span>
+        </div>
+        <div className="header_option_basket">
+          <ShoppingCartIcon/>
+          <span className="header_line_two header_count">0</span>
         </div>
       </div>
 		</div>
