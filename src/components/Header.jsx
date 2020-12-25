@@ -1,15 +1,19 @@
-import '../css/Header.css';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import '../css/Header.css';
 
-const Header = () => {
+const Header = ({ basket }) => {
 	return(
 		<div className="header">
-			<h2 className="header__title">
-        <LocalMallIcon className="header__titleIcon"/>
-        TIC CUSCO
-      </h2>
+			<Link to='/'>
+        <h2 className="header__title">
+          <LocalMallIcon className="header__titleIcon"/>
+          TIC CUSCO
+        </h2>
+      </Link>
       <div className="header__search">
         <input className="header__searchInput"/>
         <SearchIcon className="header__searchIcon" />
@@ -39,13 +43,19 @@ const Header = () => {
             Servicios
           </span>
         </div>
-        <div className="header__optionBasket">
-          <ShoppingCartIcon fontSize="inherit" />
-          <span className="header__lineTwo header__count">0</span>
-        </div>
+        <Link to='/checkout'>
+          <div className="header__optionBasket">
+            <ShoppingCartIcon fontSize="inherit" />
+            <span className="header__lineTwo header__count">{basket.reduce((sum, item)=> sum + item.count ,0)}</span>
+          </div>
+        </Link>
       </div>
 		</div>
 	);
 };
 
-export default Header;
+const mapStateToProps = state => ({
+  basket: state.basket,
+});
+
+export default connect(mapStateToProps)(Header);

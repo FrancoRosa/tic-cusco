@@ -33,7 +33,6 @@
   align-items: center;
 }
 
-
 .header__searchInput {
   height: 12px;
   padding: 10px;
@@ -74,6 +73,12 @@
   margin: 5px;
   position: absolute;
   top: 11px;
-  right: 12px;
+  right: 2px;
   font-weight: 700;
+  text-align: center;
+  width: 30px;
+}
+
+a {
+  text-decoration: none;
 }

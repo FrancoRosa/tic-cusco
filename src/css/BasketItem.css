@@ -1,0 +1,15 @@
+.basketitem {
+  background-color: #f3f3f3;
+  margin: 10px 0;
+  display: flex;
+}
+
+.basketitem > img {
+  background-color: #f3f3f3;
+  margin: 10px 0;
+}
+
+.basketitem__info {
+  background-color: #f3f3f3;
+  margin: 10px 0;
+}
