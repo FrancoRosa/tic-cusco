@@ -19,14 +19,16 @@ const Header = ({ basket }) => {
         <SearchIcon className="header__searchIcon" />
       </div>
       <div className="header__nav">
-        <div className="header__option">
-          <span className="header__lineOne">
-            Hola!
-          </span>
-          <span className="header__lineTwo">
-            Ingresa
-          </span>
-        </div>
+        <Link to="/login">
+          <div className="header__option">
+            <span className="header__lineOne">
+              Hola!
+            </span>
+              <span className="header__lineTwo">
+                Ingresa
+              </span>
+          </div>
+        </Link>
         <div className="header__option">
           <span className="header__lineOne">
             Comentarios

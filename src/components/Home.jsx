@@ -10,19 +10,19 @@ const Home = ({ addToBasket }) => {
           <Product
             id="123"
             title="Woo! woffers 35W loud as fuck"
-            price={49.90} rating={5} img="/img/prod3.png"
+            price={9.90} rating={5} img="/img/prod3.png"
           />
           <Product
             id="122"
             title="Producto inutil, solo lo usarás una vez"
-            price={49.90} rating={5} img="/img/prod1.png"
+            price={0.90} rating={5} img="/img/prod1.png"
           />
         </div>
         <div className="home__row">
           <Product
             id="222"
             title="TV 99', LED FPGA, Ultra kill "
-            price={49.90} rating={5} img="/img/prod2.png"
+            price={4.90} rating={5} img="/img/prod2.png"
           />
           <Product
             id="522"

@@ -5,7 +5,8 @@ import Subtotal from './Subtotal';
 
 const Checkout = ({ basket }) => {
   const order = basket.sort((a, b) => (a.id > b.id) ? 1 : -1);
-
+  const items = basket.reduce((sum, prod) => sum + prod.count, 0)
+  const total = basket.reduce((sum, prod) => sum + prod.price*prod.count, 0)
   return (
     <div className="checkout">
       <div className="checkout__left">
@@ -14,7 +15,7 @@ const Checkout = ({ basket }) => {
         {order.map(product => <BasketItem product={product} />)}
       </div>
       <div className="checkout__rigth">
-        <Subtotal />
+        <Subtotal value={total} items={items}/>
       </div>
     </div>
   );

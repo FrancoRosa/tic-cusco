@@ -1,4 +1,8 @@
-import { ADD_TO_BASKET, REMOVE_FROM_BASKET } from '../actions/index';
+import {
+  ADD_TO_BASKET,
+  REMOVE_FROM_BASKET,
+  DELETE_FROM_BASKET
+} from '../actions/index';
 
 const addCount = (state, item) => {
   const result = state.filter(product => product.id === item.id)[0]
@@ -24,6 +28,8 @@ const basket = (state = [], action) => {
         ...state.filter(product => product.id !== action.item.id),
         { ...action.item, count: removeCount(state, action.item)}
       ];
+    case DELETE_FROM_BASKET:
+      return state.filter(product => product.id !== action.item.id)
     default:
       return state;
   }
