@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../css/Header.css';
 
-const Header = ({ basket }) => {
+const Header = ({ basket, user }) => {
 	return(
 		<div className="header">
 			<Link to='/'>
@@ -22,7 +22,7 @@ const Header = ({ basket }) => {
         <Link to="/login">
           <div className="header__option">
             <span className="header__lineOne">
-              Hola!
+              Hola! {user.email}
             </span>
               <span className="header__lineTwo">
                 Ingresa
