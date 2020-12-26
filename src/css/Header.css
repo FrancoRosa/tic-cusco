@@ -13,6 +13,7 @@
   display: flex;
   margin: 0 10px;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .header__title {
@@ -65,15 +66,15 @@
   color: white;
   margin: 0 5px ;
   display: flex;
-  font-size: 34px;
+  font-size: 38px;
 }
 
 .header__count {
   color: #cd9042;
   margin: 5px;
   position: absolute;
-  top: 10px;
-  right: 2px;
+  top: 9px;
+  right: 4px;
   font-weight: 700;
   text-align: center;
   width: 30px;

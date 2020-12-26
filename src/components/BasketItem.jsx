@@ -6,16 +6,17 @@ const BasketItem = ({ product, addToBasket, removeFromBasket, deleteFromBasket }
   const { id, title, price, img, count } = product;
   return (
     <div className="basketitem" id={id}>
-      <img src={img} alt=""/>
+      <div className="basketitem__img">
+        <img src={img} alt=""/>
+      </div>
       <div className="basketitem__info">
         <h2>{title}</h2>
         <p>s/. <strong>{price}</strong> </p>
       </div>
       <div className="basketitem__count">
-        <button onClick={()=>addToBasket(product)}> + </button>
-        <span>{count}</span>
         <button onClick={()=>removeFromBasket(product)}> - </button>
-        <br />
+        <p>{count}</p>
+        <button onClick={()=>addToBasket(product)}> + </button>
         <button onClick={()=>deleteFromBasket(product)}> Quitar </button>
       </div>
     </div>

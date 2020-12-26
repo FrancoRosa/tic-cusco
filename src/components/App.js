@@ -5,18 +5,16 @@ import Header from './Header';
 import Home from './Home';
 import Checkout from './Checkout';
 import Login from './Login';
+import Payment from './Payment';
 import { auth } from '../firebase';
 import { setUser } from '../actions';
 
 const App = ({ user, setUser }) => {
   useEffect(() => {
     auth.onAuthStateChanged(authUser => {
-      console.log('The user is:', authUser)
       if (authUser) {
-        console.log('>>>>>loggedIN');
         setUser(authUser);
       } else {
-        console.log('>>>>>loggedOUT')
         setUser(null);
       }
     })
@@ -36,6 +34,11 @@ const App = ({ user, setUser }) => {
             <Checkout />
           </Route>
           
+          <Route path="/payment">
+            <Header user={user}/>
+            <Payment />
+          </Route>
+
           <Route path="/">
             <Header user={user} />
             <Home />

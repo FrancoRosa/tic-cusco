@@ -1,6 +1,10 @@
+import { Payment } from '@material-ui/icons';
 import CurrencyFormat from 'react-currency-format';
+import { useHistory } from 'react-router-dom';
 import '../css/Subtotal.css'
 const Subtotal = ({value, items}) => {
+  const history = useHistory();
+
   return (
     <div className="subtotal">
       <CurrencyFormat
@@ -21,7 +25,7 @@ const Subtotal = ({value, items}) => {
         thousandSeparator={true}
         prefix={'S/.'}
       />
-      <button>Proceder al pago</button>
+      {items > 0 ? <button onClick={()=>history.push('/payment')}>Proceder al pago</button> : null }
     </div>
   );
 };

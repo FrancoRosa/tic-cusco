@@ -2,14 +2,33 @@
   background-color: #f3f3f3;
   margin: 10px 0;
   display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px lightgray;
 }
 
-.basketitem > img {
+.basketitem_img > img {
   background-color: #f3f3f3;
   margin: 10px 0;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.basketitem_img {
+  flex: 0.2;
 }
 
 .basketitem__info {
   background-color: #f3f3f3;
   margin: 10px 0;
+  flex: 0.8;
+}
+
+.basketitem__count {
+  display: flex;
+  height: 30px;
+  align-items: center;
+}
+
+.basketitem__count > button {
+  margin: 5px;
 }

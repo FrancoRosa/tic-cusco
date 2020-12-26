@@ -1,11 +1,22 @@
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
-import { Link } from 'react-router-dom';
+import { AnimateOnChange } from 'react-animation';
+import { Link, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../css/Header.css';
+import { auth } from '../firebase';
+
 
 const Header = ({ basket, user }) => {
+  const history = useHistory();
+  const handleAuth = () => {
+    if (user) {
+      auth.signOut()
+    } else {
+      history.push('/login')
+    }
+  }
 	return(
 		<div className="header">
 			<Link to='/'>
@@ -19,16 +30,14 @@ const Header = ({ basket, user }) => {
         <SearchIcon className="header__searchIcon" />
       </div>
       <div className="header__nav">
-        <Link to="/login">
-          <div className="header__option">
-            <span className="header__lineOne">
-              Hola! {user.email}
+        <div className="header__option" onClick={handleAuth}>
+          <span className="header__lineOne">
+            Hola! {user ? user.email : 'Invitado'}
+          </span>
+            <span className="header__lineTwo">
+              {user ? 'Salir' : 'Ingresa'}
             </span>
-              <span className="header__lineTwo">
-                Ingresa
-              </span>
-          </div>
-        </Link>
+        </div>
         <div className="header__option">
           <span className="header__lineOne">
             Comentarios
@@ -46,10 +55,12 @@ const Header = ({ basket, user }) => {
           </span>
         </div>
         <Link to='/checkout'>
-          <div className="header__optionBasket">
-            <ShoppingCartIcon fontSize="inherit" />
-            <span className="header__lineTwo header__count">{basket.reduce((sum, item)=> sum + item.count ,0)}</span>
-          </div>
+          <AnimateOnChange animation="bounceIn">
+            <div className="header__optionBasket">
+              <ShoppingCartIcon fontSize="inherit" />
+              <span className="header__lineTwo header__count">{basket.reduce((sum, item)=> sum + item.count ,0)}</span>
+            </div>
+          </AnimateOnChange>
         </Link>
       </div>
 		</div>
