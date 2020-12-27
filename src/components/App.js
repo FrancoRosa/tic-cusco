@@ -6,6 +6,7 @@ import Home from './Home';
 import Checkout from './Checkout';
 import Login from './Login';
 import Payment from './Payment';
+import AdminLogin from './AdminLogin';
 import { auth } from '../firebase';
 import { setUser } from '../actions';
 
@@ -25,6 +26,9 @@ const App = ({ user, setUser }) => {
       <div className="app">
         <Switch>
           
+          <Route path="/admin/">
+            <AdminLogin />
+          </Route>
           <Route path="/login">
             <Login />
           </Route>

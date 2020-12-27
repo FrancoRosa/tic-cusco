@@ -2,6 +2,7 @@ export const ADD_TO_BASKET = 'ADD_TO_BASKET';
 export const REMOVE_FROM_BASKET = 'REMOVE_FROM_BASKET';
 export const DELETE_FROM_BASKET = 'DELETE_FROM_BASKET';
 export const SET_USER = 'SET_USER';
+export const SET_ADMIN = 'SET_ADMIN';
 
 export const addToBasket = item => (
   {
@@ -28,5 +29,12 @@ export const setUser = user => (
   {
     user,
     type: SET_USER,
+  }
+);
+
+export const setAdmin = admin => (
+  {
+    admin,
+    type: SET_ADMIN,
   }
 );

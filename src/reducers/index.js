@@ -1,8 +1,10 @@
 import { combineReducers, createStore } from 'redux';
 import basket from './basket';
 import user from './user';
+import admin from './admin';
 
 const rootReducer = combineReducers({
+  admin,
   basket,
   user,
 });
