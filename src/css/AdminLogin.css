@@ -1,0 +1,33 @@
+.adminlogin {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.adminlogin__form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.adminlogin__form > input {
+  text-align: center;
+}
+
+.adminlogin__form > * {
+  margin: 0.5em;
+}
+
+.adminlogin__error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: brown;
+  flex-direction: column;
+}
+
+.adminlogin__error > p {
+  margin: 1em;
+}

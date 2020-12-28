@@ -11,15 +11,19 @@ const AdminLogin = ({ admin }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (count>0) {setCount(count => count - 1)} else {setCount(0)};
+      setCount(count => count - 1);
     }, 1000);
     return () => clearInterval(interval);
   }, []);
 
+  const checkCount = () => {
+    if (count<0) setCount(0); 
+  }
+  
   const checkPass = () => {
-    if (pass == 'Diegoandrea7') {
+    if (pass === 'Diegoandrea7') {
       admin=true;
-      history.push('/admin/dashboard')
+      history.push('/dashboard')
     } else {
       setError('Error en contraseña, intenta de nuevo');
       setCount(5);
@@ -28,17 +32,18 @@ const AdminLogin = ({ admin }) => {
   
   return(
     <div className="adminlogin">
+      {checkCount()}
       { !admin ? 
         <div>
-          {
-            count <= 0?
-              <div>
+          { 
+            count == 0 ?
+              <div className="adminlogin__form">
+                <p>Hola tic-cusco</p>
                 <input type="password" value={pass} onChange={e=>{setPass(e.target.value); setError('')}}/>
                 <button onClick={checkPass}>Entrar</button>
-                <p>{count}</p>
               </div>
             :
-              <div>
+              <div className="adminlogin__error">
                 <p>{count}</p>
                 <p>{error}</p>
               </div>
