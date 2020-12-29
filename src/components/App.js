@@ -8,6 +8,7 @@ import Login from './Login';
 import Payment from './Payment';
 import AdminLogin from './AdminLogin';
 import AdminDashboard from './AdminDashboard';
+import AdminNew from './AdminNew';
 import { auth } from '../firebase';
 import { setUser } from '../actions';
 
@@ -26,6 +27,10 @@ const App = ({ user, setUser }) => {
     <Router>
       <div className="app">
         <Switch>
+          
+          <Route path="/new">
+            <AdminNew />
+          </Route>
           
           <Route path="/dashboard">
             <AdminDashboard />
