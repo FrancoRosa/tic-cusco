@@ -36,7 +36,7 @@ const AdminLogin = ({ admin }) => {
       { !admin ? 
         <div>
           { 
-            count == 0 ?
+            count === 0 ?
               <div className="adminlogin__form">
                 <p>Hola tic-cusco</p>
                 <input type="password" value={pass} onChange={e=>{setPass(e.target.value); setError('')}}/>

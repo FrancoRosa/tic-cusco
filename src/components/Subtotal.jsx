@@ -1,4 +1,3 @@
-import { Payment } from '@material-ui/icons';
 import CurrencyFormat from 'react-currency-format';
 import { useHistory } from 'react-router-dom';
 import '../css/Subtotal.css'
