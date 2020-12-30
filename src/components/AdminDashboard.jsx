@@ -1,47 +1,52 @@
 import React, { useState } from "react";
-import { storage } from "../firebase";
 import { useHistory } from 'react-router-dom';
+import { db } from '../firebase';
+import { useEffect } from 'react';
+import { connect } from 'react-redux'; 
+import { setProducts } from "../actions";
 
-export default function App() {
+const AdminDashboard = ({ products, setProducts }) => {
   const history = useHistory();
-  const [file, setFile] = useState(null);
-  const [url, setURL] = useState("");
-
-  function handleChange(e) {
-    setFile(e.target.files[0]);
+  const allProducts = [];
+  const getProducts = () => {
+    db.collection('products').get()
+    .then(query => {
+      query.forEach(doc => allProducts.push({ ...doc.data(), id: doc.id }));
+      setProducts(allProducts);
+    })
+    .catch(error => {
+      console.error(error)
+    })
   }
 
-  function handleUpload(e) {
-    e.preventDefault();
-    const uploadTask = storage.ref(`/images/${file.name}`).put(file);
-    uploadTask.on("state_changed", console.log, console.error, () => {
-      storage
-        .ref("images")
-        .child(file.name)
-        .getDownloadURL()
-        .then((url) => {
-          setFile(null);
-          setURL(url);
-        });
-    });
+  const goToProduct = id => {
+    console.log(id)
   }
+
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   return (
     <div>
       <button onClick={()=>history.push('/new')}>Nuevo Producto</button>
-      <form onSubmit={handleUpload}>
-        <input type="file" onChange={handleChange} />
-        <button disabled={!file}>upload to firebase</button>
-      </form>
-      <div>
-        <h4>preview</h4>
-
-        {file && <img src={URL.createObjectURL(file)} alt="" />}
-      </div>
-      <div>
-        <h4>Uploaded</h4>
-        <img src={url} alt="" />
-      </div>
+      {products.map(product =>
+        <div key={product.id} className="product" onClick={()=>goToProduct(product.id)}>
+          <h1>{product.title}</h1>
+          <p><strong>Precio:</strong>{product.price}</p>
+          <p><strong>Stock</strong>{product.stock}</p>
+        </div>  
+      )}
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  products: state.products,
+}) 
+
+const mapDispatchToProps = dispatch => ({
+  setProducts: products => dispatch(setProducts(products)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminDashboard);
