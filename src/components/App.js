@@ -8,6 +8,7 @@ import Login from './Login';
 import Payment from './Payment';
 import AdminLogin from './AdminLogin';
 import AdminDashboard from './AdminDashboard';
+import AdminProduct from './AdminProduct';
 import AdminNew from './AdminNew';
 import { auth } from '../firebase';
 import { setUser } from '../actions';
@@ -32,10 +33,14 @@ const App = ({ user, setUser }) => {
             <AdminNew />
           </Route>
           
+          <Route path="/dashboard/:id">
+            <AdminProduct />
+          </Route>
+
           <Route path="/dashboard">
             <AdminDashboard />
           </Route>
-          
+
           <Route path="/admin">
             <AdminLogin />
           </Route>
