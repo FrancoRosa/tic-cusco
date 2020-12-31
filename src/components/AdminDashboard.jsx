@@ -38,16 +38,33 @@ const ProductPreview = ({ product }) => {
 
 const AdminDashboard = ({ products, setProducts }) => {
   const history = useHistory();
+  const [filter, setFilter] = useState('');
+  const [result, setResult] = useState([]);
   const allProducts = [];
   const getProducts = () => {
     db.collection('products').get()
     .then(query => {
       query.forEach(doc => allProducts.push({ ...doc.data(), id: doc.id }));
       setProducts(allProducts);
+      setResult(allProducts);
+      setFilter('')
     })
     .catch(error => {
       console.error(error)
     })
+  }
+
+  const handleFilter = e => {
+    setFilter(e.target.value);
+    if (filter === '') {
+      setResult(products)
+      window.products = products
+    } else {
+      const filtered = products.filter(product => {
+        product.categories.reduce((r,w) => r || w.includes(filter.toLowerCase()), false)
+      });
+      setResult(filtered);
+    }
   }
 
   useEffect(() => {
@@ -58,6 +75,8 @@ const AdminDashboard = ({ products, setProducts }) => {
   return (
     <div>
       <button onClick={()=>history.push('/new')}>Nuevo Producto</button>
+      <input type="text" onChange={e => handleFilter(e)} value={filter}/> 
+      <p>Productos ({result.length})</p> 
       <table>
         <thead>
           <tr>
@@ -71,7 +90,7 @@ const AdminDashboard = ({ products, setProducts }) => {
           </tr>
         </thead>
         <tbody>
-          {products.map(product => <ProductPreview product={product} />)}
+          {result.map(product => <ProductPreview product={product} key={product.id}/>)}
         </tbody>
       </table>
     </div>
