@@ -54,15 +54,11 @@ const AdminDashboard = ({ products, setProducts }) => {
     })
   }
 
-  const handleFilter = e => {
-    setFilter(e.target.value);
-    if (filter === '') {
+  const handleFilter = text => {
+    if (text.length<3) {
       setResult(products)
-      window.products = products
     } else {
-      const filtered = products.filter(product => {
-        product.categories.reduce((r,w) => r || w.includes(filter.toLowerCase()), false)
-      });
+      const filtered = products.filter(product => product.categories.reduce((r,w) => r || w.includes(text.toLowerCase()), false))
       setResult(filtered);
     }
   }
@@ -71,12 +67,15 @@ const AdminDashboard = ({ products, setProducts }) => {
     getProducts();
   }, []);
 
-
   return (
     <div>
       <button onClick={()=>history.push('/new')}>Nuevo Producto</button>
-      <input type="text" onChange={e => handleFilter(e)} value={filter}/> 
-      <p>Productos ({result.length})</p> 
+      <br />
+      <div className="search">
+        <h6>Filtrar: </h6>
+        <input type="text" onChange={e => { handleFilter(e.target.value); setFilter(e.target.value)}} value={filter}/> 
+        <p>Productos ({result.length})</p> 
+      </div>
       <table>
         <thead>
           <tr>
