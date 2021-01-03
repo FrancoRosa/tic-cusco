@@ -3,14 +3,14 @@ import { removeFromBasket, addToBasket, deleteFromBasket } from '../actions';
 import '../css/BasketItem.css'
 
 const BasketItem = ({ product, addToBasket, removeFromBasket, deleteFromBasket }) => {
-  const { id, title, price, img, count } = product;
+  const { id, description, price, urls, count } = product;
   return (
     <div className="basketitem" id={id}>
       <div className="basketitem__img">
-        <img src={img} alt=""/>
+        <img src={urls[0]} alt=""/>
       </div>
       <div className="basketitem__info">
-        <h2>{title}</h2>
+        <h2>{description}</h2>
         <p>s/. <strong>{price}</strong> </p>
       </div>
       <div className="basketitem__count">

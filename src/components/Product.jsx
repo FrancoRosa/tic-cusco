@@ -22,8 +22,8 @@ const Product = ({product, addToBasket}) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addToBasket: product => {
-    dispatch(addToBasket(product));
+  addToBasket: item => {
+    dispatch(addToBasket(item));
   },
 });
 

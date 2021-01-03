@@ -29,8 +29,6 @@ const Home = ({ products }) => {
             && 
             <HomeProducts products={products} />
           }
-          <p><strong>prodcuts: </strong>{products.length}</p>
-          <p><strong>minProducts: </strong>{minProducts}</p>
       </div>
     </div>
   );
