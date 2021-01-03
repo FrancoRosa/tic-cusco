@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
-// import { db } from '../firebase';
-// import { useEffect } from 'react';
 import { connect } from 'react-redux'; 
-// import { setProducts } from "../actions";
 import '../css/AdminDashboard.css'
+import { useEffect } from "react";
 
 const ProductPreview = ({ product }) => {
   const history = useHistory();
@@ -24,6 +22,8 @@ const ProductPreview = ({ product }) => {
     history.push(`/dashboard/${id}`) 
   }
 
+  
+
   return(
     <tr key={id} className="product__row" onClick={()=>goToProduct(id)}>
       <td>{description}</td>
@@ -38,37 +38,18 @@ const ProductPreview = ({ product }) => {
   )
 }
 
+const categoryFilter = (products, text) => {
+  if (text.length <= 1) {
+    return products;
+  } else {
+    const filtered = products.filter(product => product.categories.reduce((r,w) => r || w.includes(text.toLowerCase()), false))
+    return filtered;
+  }
+}
+
 const AdminDashboard = ({ products }) => {
   const history = useHistory();
   const [filter, setFilter] = useState('');
-  const [result, setResult] = useState([]);
-  
-  // const getProducts = () => {
-  //   const allProducts = [];
-  //   db.collection('products').get()
-  //   .then(query => {
-  //     query.forEach(doc => allProducts.push({ ...doc.data(), id: doc.id }));
-  //     setProducts(allProducts);
-  //     setResult(allProducts);
-  //     setFilter('')
-  //   })
-  //   .catch(error => {
-  //     console.error(error)
-  //   })
-  // }
-
-  const handleFilter = text => {
-    if (text.length<3) {
-      setResult(products)
-    } else {
-      const filtered = products.filter(product => product.categories.reduce((r,w) => r || w.includes(text.toLowerCase()), false))
-      setResult(filtered);
-    }
-  }
-
-  // useEffect(() => {
-  //   getProducts();
-  // }, []);
 
   return (
     <div>
@@ -76,8 +57,10 @@ const AdminDashboard = ({ products }) => {
       <br />
       <div className="search">
         <h6>Filtrar: </h6>
-        <input type="text" onChange={e => { handleFilter(e.target.value); setFilter(e.target.value)}} value={filter}/> 
-        <p>Productos ({result.length})</p> 
+        <input type="text" onChange={e => setFilter(e.target.value)} value={filter}/>
+        <br />
+        <p><strong>Total: </strong> {products.length} productos</p>
+        <p><strong>Resultados: </strong> {categoryFilter(products,filter).length} productos</p>
       </div>
       <table>
         <thead>
@@ -93,7 +76,7 @@ const AdminDashboard = ({ products }) => {
           </tr>
         </thead>
         <tbody>
-          {result.map(product => <ProductPreview product={product} key={product.id}/>)}
+          {categoryFilter(products, filter).map(product => <ProductPreview product={product} key={product.id}/>)}
         </tbody>
       </table>
     </div>

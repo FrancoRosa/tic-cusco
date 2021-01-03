@@ -20,9 +20,11 @@ import { db } from '../firebase';
 const App = ({ user, setUser, products, setProducts }) => {
   
   const getProducts = () => {
+    console.log('... reading products from Firebase')
     const allProducts = [];
     db.collection('products').get()
     .then(query => {
+      console.log('... saving data on redux store')
       query.forEach(doc => allProducts.push({ ...doc.data(), id: doc.id }));
       setProducts(allProducts);
     })
