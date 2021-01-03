@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
-import { db } from '../firebase';
-import { useEffect } from 'react';
+// import { db } from '../firebase';
+// import { useEffect } from 'react';
 import { connect } from 'react-redux'; 
-import { setProducts } from "../actions";
+// import { setProducts } from "../actions";
 import '../css/AdminDashboard.css'
 
 const ProductPreview = ({ product }) => {
@@ -13,6 +13,7 @@ const ProductPreview = ({ product }) => {
     description,
     categories,
     stock,
+    listprice,
     price,
     highlight,
     list,
@@ -31,28 +32,30 @@ const ProductPreview = ({ product }) => {
       <td>{list ? 'si': 'no'}</td>
       <td>{urls.length}</td>
       <td>{stock}</td>
+      <td>{listprice}</td>
       <td>{price}</td>
     </tr>
   )
 }
 
-const AdminDashboard = ({ products, setProducts }) => {
+const AdminDashboard = ({ products }) => {
   const history = useHistory();
   const [filter, setFilter] = useState('');
   const [result, setResult] = useState([]);
-  const allProducts = [];
-  const getProducts = () => {
-    db.collection('products').get()
-    .then(query => {
-      query.forEach(doc => allProducts.push({ ...doc.data(), id: doc.id }));
-      setProducts(allProducts);
-      setResult(allProducts);
-      setFilter('')
-    })
-    .catch(error => {
-      console.error(error)
-    })
-  }
+  
+  // const getProducts = () => {
+  //   const allProducts = [];
+  //   db.collection('products').get()
+  //   .then(query => {
+  //     query.forEach(doc => allProducts.push({ ...doc.data(), id: doc.id }));
+  //     setProducts(allProducts);
+  //     setResult(allProducts);
+  //     setFilter('')
+  //   })
+  //   .catch(error => {
+  //     console.error(error)
+  //   })
+  // }
 
   const handleFilter = text => {
     if (text.length<3) {
@@ -63,9 +66,9 @@ const AdminDashboard = ({ products, setProducts }) => {
     }
   }
 
-  useEffect(() => {
-    getProducts();
-  }, []);
+  // useEffect(() => {
+  //   getProducts();
+  // }, []);
 
   return (
     <div>
@@ -85,6 +88,7 @@ const AdminDashboard = ({ products, setProducts }) => {
             <th>Listado</th>
             <th>Imagenes</th>
             <th>Stock</th>
+            <th>PrecioLista</th>
             <th>Precio</th>
           </tr>
         </thead>
@@ -100,8 +104,9 @@ const mapStateToProps = state => ({
   products: state.products,
 }) 
 
-const mapDispatchToProps = dispatch => ({
-  setProducts: products => dispatch(setProducts(products)),
-})
+// const mapDispatchToProps = dispatch => ({
+//   setProducts: products => dispatch(setProducts(products)),
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminDashboard);
+// export default connect(mapStateToProps, mapDispatchToProps)(AdminDashboard);
+export default connect(mapStateToProps)(AdminDashboard);

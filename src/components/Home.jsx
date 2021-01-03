@@ -1,50 +1,43 @@
-import '../css/Home.css';
+import { connect } from 'react-redux';
 import Product from './Product';
+import '../css/Home.css';
 
-const Home = ({ addToBasket }) => {
+const groups = [[0,1],[2],[3,4]];
+const minProducts = groups.reduce((sum, group) => group.length + sum, 0);
+
+const HomeProducts = ({ products }) => {
+  return (
+    <div>
+      {groups.map(group =>
+        <div className='home__row'>
+          {group.map(product =>
+            <Product product={products[product]}/>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+const Home = ({ products }) => {
   return (
     <div className="home">
       <div className="home__container">
         <img src="/img/home1.png" alt="home" className="home__image" />
-        <div className="home__row">
-          <Product
-            id="123"
-            title="Woo! woffers 35W loud as fuck"
-            price={9.90} rating={5} img="/img/prod3.png"
-          />
-          <Product
-            id="122"
-            title="Producto inutil, solo lo usarás una vez"
-            price={0.90} rating={5} img="/img/prod1.png"
-          />
-        </div>
-        <div className="home__row">
-          <Product
-            id="222"
-            title="TV 99', LED FPGA, Ultra kill "
-            price={4.90} rating={5} img="/img/prod2.png"
-          />
-          <Product
-            id="522"
-            title="Producto inutil, solo lo usarás una vez"
-            price={49.90} rating={5} img="/img/prod3.png"
-          />
-          <Product
-            id="125"
-            title="Producto inutil, solo lo usarás una vez"
-            price={49.90} rating={5} img="/img/prod1.png"
-          />
-        </div>
-        <div className="home__row">
-          <Product
-            id="222"
-            title="TV 99', LED FPGA, Ultra kill "
-            price={49.90} rating={5} img="/img/prod2.png"
-          />
-        </div>
+          {
+            products.length > minProducts
+            && 
+            <HomeProducts products={products} />
+          }
+          <p><strong>prodcuts: </strong>{products.length}</p>
+          <p><strong>minProducts: </strong>{minProducts}</p>
       </div>
     </div>
   );
 } 
 
-export default Home;
+const mapStateToProps = state => ({
+  products: state.products
+})
+
+export default connect(mapStateToProps)(Home);

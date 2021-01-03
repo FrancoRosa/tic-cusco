@@ -9,6 +9,7 @@ const AdminNew = () => {
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]);
   const [stock, setStock] = useState(0);
+  const [listprice, setListPrice] = useState(0);
   const [price, setPrice] = useState(0);
   const [highlight, setHighlight] = useState(false);
   const [list, setList] = useState(false);
@@ -32,6 +33,7 @@ const AdminNew = () => {
         description,
         categories,
         stock,
+        listprice,
         price,
         highlight,
         list,
@@ -123,6 +125,10 @@ const AdminNew = () => {
           
           <h6>Stock</h6>
           <input type="number" value={stock} onChange={e=> setStock(e.target.value)} />
+          
+          <h6>Precio de Lista</h6>
+          <input type="number" value={listprice} onChange={e=> setListPrice(e.target.value)} />
+          
           
           <h6>Precio</h6>
           <input type="number" value={price} onChange={e=> setPrice(e.target.value)} />

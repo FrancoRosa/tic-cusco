@@ -11,9 +11,26 @@ import AdminDashboard from './AdminDashboard';
 import AdminProduct from './AdminProduct';
 import AdminNew from './AdminNew';
 import { auth } from '../firebase';
-import { setUser } from '../actions';
+import { setProducts, setUser } from '../actions';
+import { db } from '../firebase';
 
-const App = ({ user, setUser }) => {
+
+
+
+const App = ({ user, setUser, products, setProducts }) => {
+  
+  const getProducts = () => {
+    const allProducts = [];
+    db.collection('products').get()
+    .then(query => {
+      query.forEach(doc => allProducts.push({ ...doc.data(), id: doc.id }));
+      setProducts(allProducts);
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  }
+  
   useEffect(() => {
     auth.onAuthStateChanged(authUser => {
       if (authUser) {
@@ -21,7 +38,8 @@ const App = ({ user, setUser }) => {
       } else {
         setUser(null);
       }
-    })
+    });
+    getProducts();
   }, [])
 
   return (
@@ -70,11 +88,13 @@ const App = ({ user, setUser }) => {
   );
 }
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  products: state.products,
 });
 
 const mapDispatchToProps = dispatch => ({
   setUser: user => dispatch(setUser(user)),
+  setProducts: products => dispatch(setProducts(products)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

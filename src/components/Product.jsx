@@ -1,38 +1,29 @@
 import { connect } from 'react-redux';
 import '../css/Product.css';
-import { Star } from '@material-ui/icons';
 import { addToBasket } from '../actions';
 
-const Product = ({id, title, price, rating, img, addToBasket}) => {
-  const item = {
-    id,
-    title,
-    price,
-    img,
-    rating
-  };
+const Product = ({product, addToBasket}) => {
+  const { id, description, price, urls, stock } = product
 
   return (
     <div id={id} className="product">
       <div className="product__info">
-        <p>{title}</p>
+        <p>{description}</p>
         <p className="product__price">
           <small>s/.</small>
           <strong>{price}</strong>
         </p>
-        <div className="product__rating">
-          {Array(rating).fill().map((_, i) => <Star />)}
-        </div>
+        <p><strong>Stock: </strong>{stock}</p>
       </div>
-      <img src={img} alt="" />
-      <button onClick={() => addToBasket(item)}>Añadir al carrito</button>
+      <img src={urls[0]} alt="" />
+      <button onClick={() => addToBasket(product)}>Añadir al carrito</button>
     </div>
   );
 }
 
 const mapDispatchToProps = dispatch => ({
-  addToBasket: item => {
-    dispatch(addToBasket(item));
+  addToBasket: product => {
+    dispatch(addToBasket(product));
   },
 });
 
