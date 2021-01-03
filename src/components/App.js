@@ -10,6 +10,7 @@ import AdminLogin from './AdminLogin';
 import AdminDashboard from './AdminDashboard';
 import AdminProduct from './AdminProduct';
 import AdminNew from './AdminNew';
+import AdminEdit from './AdminEdit';
 import { auth } from '../firebase';
 import { setProducts, setUser } from '../actions';
 import { db } from '../firebase';
@@ -55,6 +56,10 @@ const App = ({ user, setUser, products, setProducts }) => {
           
           <Route path="/dashboard/:id">
             <AdminProduct />
+          </Route>
+
+          <Route path="/edit/:id">
+            <AdminEdit />
           </Route>
 
           <Route path="/dashboard">

@@ -5,6 +5,7 @@ const AdminProduct = ({ products }) => {
   const params = useParams();
   const history = useHistory();  
   const {
+    id,
     description,
     categories,
     stock,
@@ -31,6 +32,7 @@ const AdminProduct = ({ products }) => {
         }
       </div>
       <button onClick={()=>history.push('/dashboard')}>Regresar</button>  
+      <button onClick={()=>history.push(`/edit/${id}`)}>Edit</button>  
     </div>
   );
 }

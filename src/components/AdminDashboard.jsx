@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 import '../css/AdminDashboard.css'
-import { useEffect } from "react";
 
 const ProductPreview = ({ product }) => {
   const history = useHistory();
@@ -18,14 +17,8 @@ const ProductPreview = ({ product }) => {
     urls 
   } = product;
   
-  const goToProduct = id => {
-    history.push(`/dashboard/${id}`) 
-  }
-
-  
-
   return(
-    <tr key={id} className="product__row" onClick={()=>goToProduct(id)}>
+    <tr key={id} className="product__row" onClick={()=>history.push(`/dashboard/${id}`)}>
       <td>{description}</td>
       <td>{categories.join(', ')}</td>
       <td>{highlight ? 'si': 'no'}</td>
