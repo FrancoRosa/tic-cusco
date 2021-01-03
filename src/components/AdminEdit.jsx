@@ -22,7 +22,7 @@ const AdminEdit = ({ products }) => {
   let urls = product.urls;
 
 
-  const saveProduct = async event => {
+  const updateProduct = async event => {
     event.preventDefault();
     const promises = [];
     images.forEach(img => {
@@ -68,6 +68,8 @@ const AdminEdit = ({ products }) => {
             case 'running': // or 'running'
               console.log('Upload is running');
               break;
+            default:
+              break;
           }
         }, error => {
         switch (error.code) {
@@ -76,6 +78,8 @@ const AdminEdit = ({ products }) => {
           case 'storage/canceled':
             break;
           case 'storage/unknown':
+            break;
+          default:
             break;
         }
       }, () => {
@@ -99,7 +103,6 @@ const AdminEdit = ({ products }) => {
     event.preventDefault();
     console.log(image)
     if (image) {
-      console.log('saving...')
       setImages([...images, image]);
       setImage(null);
     }
@@ -114,7 +117,7 @@ const AdminEdit = ({ products }) => {
     { !success ?
       <div className="new__container">
         <h1>Editar Producto</h1>
-        <form action="">
+        <div>
           <h6>Descripcion</h6>
           <input type="text" value={description} onChange={e=> setDescription(e.target.value)} />
           
@@ -125,6 +128,7 @@ const AdminEdit = ({ products }) => {
             placeholder="teclado"
           />
           <button onClick={addCategory}>Añadir categoria</button>
+          <button onClick={e=>{e.preventDefault();setCategories([])}}>Borrar categorias</button>
           
           <h6>Stock</h6>
           <input type="number" value={stock} onChange={e=> setStock(e.target.value)} />
@@ -142,15 +146,20 @@ const AdminEdit = ({ products }) => {
           <h6>Listar</h6>
           <input type="checkbox" value={list} onChange={e=> setList(e.target.checked)} />
           
+          <h6>Imagenes Guardadas</h6>
+          <button onCLick={()=>console.log('test')}>Borrar Imagenes</button>
+          <br />
+          {urls.map(url => <img src={url} alt=""/>)}
+          <br />
           <h6>Imagenes</h6>
           {images.map(img => <img src={URL.createObjectURL(img)} alt=""/>)}
           <input type="file" onChange={e=> setImage(e.target.files[0])} />
           <button onClick={addImage}>Añadir Imagen</button>
           <br />
 
-          <button onClick={saveProduct}>Guardar</button>
-        </form>
-        <button onClick={()=>history.push('/dashboard')}>Cancelar</button>
+          <button onClick={updateProduct}>Guardar</button>
+        </div>
+        <button onClick={()=>history.push(`/dashboard/${product.id}`)}>Cancelar</button>
       </div> :
       <div className="new__success">
         {successTimer()}

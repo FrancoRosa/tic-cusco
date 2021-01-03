@@ -9,6 +9,7 @@ const AdminProduct = ({ products }) => {
     description,
     categories,
     stock,
+    listprice,
     price,
     highlight,
     list,
@@ -22,13 +23,14 @@ const AdminProduct = ({ products }) => {
         <p><strong>Destacado: </strong>{highlight ? 'si': 'no'}</p>
         <p><strong>Listado: </strong>{list ? 'si': 'no'}</p>
         <p><strong>Stock: </strong>{stock}</p>
+        <p><strong>Precio de Lista: </strong>{listprice}</p>
         <p><strong>Precio: </strong>{price}</p>
         <br />
         <h5>Imagenes({urls.length})</h5>
         {
           urls.length > 0
           &&
-          urls.map(img => <img src={img} />)
+          urls.map(img => <img src={img} alt=""/>)
         }
       </div>
       <button onClick={()=>history.push('/dashboard')}>Regresar</button>  
