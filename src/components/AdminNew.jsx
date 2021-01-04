@@ -98,12 +98,19 @@ const AdminNew = () => {
   
   const addImage = event => {
     event.preventDefault();
-    console.log(image)
     if (image) {
-      console.log('saving...')
       setImages([...images, image]);
       setImage(null);
     }
+  }
+
+  const removeImage = event => {
+    event.preventDefault();
+    console.log('removing')
+    const tempImages = [...images];
+    tempImages.pop()
+    setImages(tempImages);
+    setImage(null);
   }
 
   const successTimer = () => {
@@ -112,48 +119,100 @@ const AdminNew = () => {
 
   return(
   <div className="new">
-    { !success ?
-      <div className="new__container">
-        <h1>Nuevo Producto</h1>
-        <form action="">
-          <h6>Descripcion</h6>
-          <input type="text" value={description} onChange={e=> setDescription(e.target.value)} />
-          
-          <h6>Categorias</h6>
-          <p>{categories.join(', ')}</p>
-          <input type="text" value={category}
-            onChange={e=> setCategory(e.target.value)}
-            placeholder="teclado"
-          />
-          <button onClick={addCategory}>Añadir categoria</button>
-          
-          <h6>Stock</h6>
-          <input type="number" value={stock} onChange={e=> setStock(e.target.value)} />
-          
-          <h6>Precio de Lista</h6>
-          <input type="number" value={listprice} onChange={e=> setListPrice(e.target.value)} />
-          
-          
-          <h6>Precio</h6>
-          <input type="number" value={price} onChange={e=> setPrice(e.target.value)} />
-          
-          <h6>Destacar</h6>
-          <input type="checkbox" value={highlight} onChange={e=>setHighlight(e.target.checked)} />
-          
-          <h6>Listar</h6>
-          <input type="checkbox" value={list} onChange={e=> setList(e.target.checked)} />
-          
-          <h6>Imagenes</h6>
-          {images.map(img => <img src={URL.createObjectURL(img)} alt=""/>)}
-          <input type="file" onChange={e=> setImage(e.target.files[0])} />
-          <button onClick={addImage}>Añadir Imagen</button>
-          <br />
+    <div className="navbar dashboard__nav">
+      <div className="navbar-brand">
+        <h1 
+          className="title is-3 dashboard__title"
+          onClick={() => history.push('/')}
+        >
+          tic-cusco
+        </h1>
+        
+      </div>
+      <div className="navbar-menu">
+        <div className="navbar-start new__title">
+          <h1 className="title is-6">Nuevo Producto</h1>
+        </div>
+        <div className="navbar-end">
+          <button className="button is-success new__button" onClick={saveProduct}>Guardar</button>
+          <button className="button is-danger new__button" onClick={()=>history.push('/dashboard')}>Cancelar</button>
+        </div>
+      </div>
+    </div>
 
-          <button onClick={saveProduct}>Guardar</button>
-        </form>
-        <button onClick={()=>history.push('/dashboard')}>Cancelar</button>
+    { !success ?
+      <div className="container">
+        <div className="card new__form">
+          <form action="">
+            <label>Descripcion</label>
+            <input
+              className="input"
+              type="text" value={description}
+              onChange={e=> setDescription(e.target.value)}
+            />
+            <hr/>
+            <label>Categorias</label>
+            <p>{categories.join(', ')}</p>
+            <input 
+              className="input"
+              type="text" value={category}
+              onChange={e=> setCategory(e.target.value)}
+              placeholder="teclado"
+            />
+            <button className="button is-link" onClick={addCategory}>Añadir categoria</button>
+            <hr/>
+            <label>Stock</label>
+            <input 
+              className="input"
+              type="number" value={stock}
+              onChange={e=> setStock(e.target.value)}
+            />
+            
+            <label>Precio de Lista</label>
+            <input 
+              className="input"
+              type="number" value={listprice}
+              onChange={e=> setListPrice(e.target.value)}
+            />
+            
+            <label>Precio</label>
+            <input 
+              className="input"
+              type="number" value={price}
+              onChange={e=> setPrice(e.target.value)}
+            />
+            
+            <label>Destacar</label>
+            <input 
+              type="checkbox" value={highlight}
+              onChange={e=>setHighlight(e.target.checked)}
+            />
+            <br/>
+            <label>Listar</label>
+            <input 
+              type="checkbox" value={list}
+              onChange={e=> setList(e.target.checked)}
+            />
+            <br/>
+            
+            <label>Añadir imagenes: </label>
+            <br/>
+            <input 
+              type="file" onChange={e=> setImage(e.target.files[0])}
+            />
+            { images.length > 0 && <button className="button is-danger" onClick={removeImage}>Borrar Imagen</button> }
+            <button className="button is-link" onClick={addImage}>Añadir Imagen</button>
+            
+            <br/>
+            <hr/>
+            <h6>Imagenes seleccionadas:</h6>
+            {images.map(img => <img src={URL.createObjectURL(img)} alt=""/>)}
+            <br />
+          </form>
+        </div>
+
       </div> :
-      <div className="new__success">
+      <div className="container">
         {successTimer()}
         Producto guardado, redireccinando...
       </div>
