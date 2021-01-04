@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import '../css/AdminProduct.css';
 
 const AdminProduct = ({ products }) => {
   const params = useParams();
@@ -16,7 +17,9 @@ const AdminProduct = ({ products }) => {
     urls 
   } = products.filter(product => product.id === params.id)[0];
   return (
-    <div className="admin__product">
+    <div>
+      
+      <div className="container">
       <div>
         <p><strong>Descripcion: </strong>{description}</p>
         <p><strong>Categorias: </strong>{categories.join(', ')}</p>
@@ -35,6 +38,7 @@ const AdminProduct = ({ products }) => {
       </div>
       <button onClick={()=>history.push('/dashboard')}>Regresar</button>  
       <button onClick={()=>history.push(`/edit/${id}`)}>Edit</button>  
+    </div>
     </div>
   );
 }

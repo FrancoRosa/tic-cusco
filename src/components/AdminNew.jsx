@@ -100,7 +100,7 @@ const AdminNew = () => {
     event.preventDefault();
     if (image) {
       setImages([...images, image]);
-      setImage(null);
+      setImage('');
     }
   }
 
@@ -110,7 +110,7 @@ const AdminNew = () => {
     const tempImages = [...images];
     tempImages.pop()
     setImages(tempImages);
-    setImage(null);
+    setImage('');
   }
 
   const successTimer = () => {
@@ -193,7 +193,7 @@ const AdminNew = () => {
               type="checkbox" value={list}
               onChange={e=> setList(e.target.checked)}
             />
-            <br/>
+            <hr/>
             
             <label>Añadir imagenes: </label>
             <br/>

@@ -107,9 +107,4 @@ const mapStateToProps = state => ({
   products: state.products,
 }) 
 
-// const mapDispatchToProps = dispatch => ({
-//   setProducts: products => dispatch(setProducts(products)),
-// })
-
-// export default connect(mapStateToProps, mapDispatchToProps)(AdminDashboard);
 export default connect(mapStateToProps)(AdminDashboard);
