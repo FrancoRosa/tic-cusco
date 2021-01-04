@@ -65,6 +65,8 @@ const AdminNew = () => {
             case 'running': // or 'running'
               console.log('Upload is running');
               break;
+            default:
+              break;
           }
         }, error => {
         switch (error.code) {
@@ -73,6 +75,8 @@ const AdminNew = () => {
           case 'storage/canceled':
             break;
           case 'storage/unknown':
+            break;
+          default:
             break;
         }
       }, () => {
