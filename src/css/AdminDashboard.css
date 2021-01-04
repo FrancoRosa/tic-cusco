@@ -1,17 +1,35 @@
-.product__row{
+.dashboard__nav {
+  background-color: lightblue;
+  padding: 0.5em 0.5em 0;
+}
+
+.dashboard__search {
+  display: flex;
+  padding: 0 1em;
+}
+
+.dashboard__search > *{
+  margin: 0;
+  padding: 0 1em;
+}
+
+.dashboard__select {
+  background-color: lightblue !important;
   cursor: pointer;
 }
 
-table {
-  border-collapse: collapse;
-}
-
-td, th {
-  border: 1px solid #999;
-  padding: 0.5rem;
-  text-align: left;
-}
-
-.search {
+.dashboard__stats {
+  margin: 1em;
+  padding: 1em;
   display: flex;
+  justify-content: space-between;
+}
+
+.dashboard__table {
+  margin: 1em;
+  padding: 1em;
+}
+
+.dashboard__title {
+  cursor: pointer;
 }

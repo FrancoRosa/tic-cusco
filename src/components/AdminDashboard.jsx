@@ -5,6 +5,7 @@ import '../css/AdminDashboard.css'
 
 const ProductPreview = ({ product }) => {
   const history = useHistory();
+  const [hover, setHover] = useState(false);
   const {
     id,
     description,
@@ -18,7 +19,13 @@ const ProductPreview = ({ product }) => {
   } = product;
   
   return(
-    <tr key={id} className="product__row" onClick={()=>history.push(`/dashboard/${id}`)}>
+    <tr 
+      key={id}
+      className={hover && "dashboard__select"}
+      onClick={()=>history.push(`/dashboard/${id}`)}
+      onMouseEnter={()=>setHover(true)}
+      onMouseLeave={()=>setHover(false)}
+    >
       <td>{description}</td>
       <td>{categories.join(', ')}</td>
       <td>{highlight ? 'si': 'no'}</td>
@@ -45,33 +52,53 @@ const AdminDashboard = ({ products }) => {
   const [filter, setFilter] = useState('');
 
   return (
-    <div>
-      <button onClick={()=>history.push('/new')}>Nuevo Producto</button>
-      <br />
-      <div className="search">
-        <h6>Filtrar: </h6>
-        <input type="text" onChange={e => setFilter(e.target.value)} value={filter}/>
-        <br />
-        <p><strong>Total: </strong> {products.length} productos</p>
-        <p><strong>Resultados: </strong> {categoryFilter(products,filter).length} productos</p>
+    <div className="dashboard">
+      <div className="navbar dashboard__nav">
+        <div className="navbar-brand">
+          <h1 
+            className="title is-3 dashboard__title"
+            onClick={() => history.push('/')}
+          >
+            tic-cusco
+          </h1>
+          
+        </div>
+        <div className="navbar-menu">
+          <div className="navbar-start dashboard__search">
+            <h6 className="label">Buscar: </h6>
+            <input className="input" type="text" 
+              onChange={e => setFilter(e.target.value)}
+              value={filter}
+            />
+          </div>
+          <div className="navbar-end">
+            <button className="button is-link" onClick={()=>history.push('/new')}>Nuevo</button>
+          </div>
+        </div>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Descripcion</th>
-            <th>Categorias</th>
-            <th>Destacado</th>
-            <th>Listado</th>
-            <th>Imagenes</th>
-            <th>Stock</th>
-            <th>PrecioLista</th>
-            <th>Precio</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categoryFilter(products, filter).map(product => <ProductPreview product={product} key={product.id}/>)}
-        </tbody>
-      </table>
+      <div className="container">
+        <div className="card dashboard__stats">
+          <p><strong>Total: </strong> {products.length} productos</p>
+          <p><strong>Resultados: </strong> {categoryFilter(products,filter).length} productos</p>
+        </div>
+        <table className="card table is-striped dashboard__table">
+          <thead>
+            <tr>
+              <th>Descripcion</th>
+              <th>Categorias</th>
+              <th>Destacado</th>
+              <th>Listado</th>
+              <th>Imagenes</th>
+              <th>Stock</th>
+              <th>PrecioLista</th>
+              <th>Precio</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categoryFilter(products, filter).map(product => <ProductPreview product={product} key={product.id}/>)}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
