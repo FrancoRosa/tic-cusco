@@ -13,7 +13,7 @@ const AdminNew = () => {
   const [price, setPrice] = useState(0);
   const [highlight, setHighlight] = useState(false);
   const [list, setList] = useState(false);
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(null);
   const [images, setImages] = useState([]);
   const [success, setSuccess] = useState(false);
   let urls = [];
@@ -25,8 +25,8 @@ const AdminNew = () => {
     images.forEach(img => {
       promises.push(saveImage(img, urls));
     });
-    
-    Promise.all(promises).then(()=>{
+    if (description && categories.length > 0){
+      Promise.all(promises).then(()=>{
       console.log('urls');
       console.log(urls);
       db.collection('products').add({
@@ -48,6 +48,7 @@ const AdminNew = () => {
         console.error(error.message);
       });
     })
+    }
   }
 
   const saveImage = (file, urls) => { 
@@ -96,11 +97,18 @@ const AdminNew = () => {
     }
   }
   
+  const removeCategory = event => {
+    event.preventDefault();
+    const tempCategories = [...categories]
+    tempCategories.pop()
+    setCategories(tempCategories);
+  }
+
   const addImage = event => {
     event.preventDefault();
     if (image) {
       setImages([...images, image]);
-      setImage('');
+      setImage(null);
     }
   }
 
@@ -110,7 +118,7 @@ const AdminNew = () => {
     const tempImages = [...images];
     tempImages.pop()
     setImages(tempImages);
-    setImage('');
+    setImage(null);
   }
 
   const successTimer = () => {
@@ -134,7 +142,12 @@ const AdminNew = () => {
           <h1 className="title is-6">Nuevo Producto</h1>
         </div>
         <div className="navbar-end">
-          <button className="button is-success new__button" onClick={saveProduct}>Guardar</button>
+          <button
+            className={`button new__button ${description && categories.length > 0 ? 'is-success' : 'is-light'}`}
+            onClick={saveProduct}
+          >
+            Guardar
+          </button>
           <button className="button is-danger new__button" onClick={()=>history.push('/dashboard')}>Cancelar</button>
         </div>
       </div>
@@ -149,23 +162,28 @@ const AdminNew = () => {
                 <th>Descripción:</th>
                 <td>
                   <input
-                    className="input"
+                    className="input" required
                     type="text" value={description}
                     onChange={e=> setDescription(e.target.value)}
                   />
                 </td>
               </tr>
               <tr>
-                <th>Categorias:</th>
+                <th>Categorias ({categories.length}):</th>
                 <td>
                   <p>{categories.join(', ')}</p>
+                  {
+                    categories.length > 0 
+                    && 
+                    <button className="button is-danger is-small new__button" onClick={removeCategory}>Borrar categoria</button>
+                  }
                   <input 
-                    className="input"
+                    className="input" required
                     type="text" value={category}
                     onChange={e=> setCategory(e.target.value)}
                     placeholder="teclado"
                   />
-                  <button className="button is-link" onClick={addCategory}>Añadir categoria</button>
+                  <button className="button is-success new__button is-small" onClick={addCategory}>Añadir categoria</button>
                 </td>
               </tr>
               <tr>
@@ -218,10 +236,25 @@ const AdminNew = () => {
               <tr>
                 <th>Imagenes:</th>
                 <td>
-                  <input 
+                  {/* <input 
                     type="file" onChange={e=> setImage(e.target.files[0])}
-                  />
-                  <button className="button is-link" onClick={addImage}>Añadir Imagen</button>
+                  /> */}
+                  <div class="file">
+                    <label class="file-label is-small">
+                      <input class="file-input" type="file" onChange={e=> setImage(e.target.files[0])} />
+                      <span class="file-cta">
+                        <span class="file-icon">
+                          <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                          {image ? image.name : 'Buscar imagen ...'}
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  {image && <img className="new__image" src={URL.createObjectURL(image)} alt=""/>}
+                  <br/>
+                  {image && <button className="button is-success is-small new__button" onClick={addImage}>Añadir Imagen</button>}
                 </td>
               </tr>
               <tr>
@@ -231,7 +264,7 @@ const AdminNew = () => {
                   { 
                     images.length > 0
                     &&
-                    <button className="button is-danger" onClick={removeImage}>Borrar Imagen</button>
+                    <button className="button is-danger new__button is-small" onClick={removeImage}>Borrar Imagen</button>
                   }
                 </td>
               </tr>
