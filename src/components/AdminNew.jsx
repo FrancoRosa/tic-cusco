@@ -21,14 +21,13 @@ const AdminNew = () => {
 
   const saveProduct = async event => {
     event.preventDefault();
+    event.target.classList.add('is-loading');
     const promises = [];
     images.forEach(img => {
       promises.push(saveImage(img, urls));
     });
-    if (description && categories.length > 0){
+    if (description && (categories.length > 0)){
       Promise.all(promises).then(()=>{
-      console.log('urls');
-      console.log(urls);
       db.collection('products').add({
         description,
         categories,
@@ -40,12 +39,11 @@ const AdminNew = () => {
         urls,
       })
       .then(() => {
-        console.log('...productSaved');
-        setSuccess(true);
+        event.target.classList.remove('is-loading')
+        history.push('/dashboard')
       })
       .catch(error =>{
-        console.error('...was it an error?');
-        console.error(error.message);
+        event.target.classList.remove('is-loading')
       });
     })
     }
@@ -148,7 +146,7 @@ const AdminNew = () => {
           >
             Guardar
           </button>
-          <button className="button is-danger new__button" onClick={()=>history.push('/dashboard')}>Cancelar</button>
+          <button className="button is-link new__button" onClick={()=>history.push('/dashboard')}>Cancelar</button>
         </div>
       </div>
     </div>

@@ -32,8 +32,8 @@ const AdminProduct = ({ products }) => {
             <h1 className="title is-6">Detalles de producto</h1>
           </div>
           <div className="navbar-end">
+            <button className="button is-success new__button" onClick={()=>history.push(`/edit/${id}`)}>Editar</button>  
             <button className="button is-link new__button" onClick={()=>history.push('/dashboard')}>Regresar</button>  
-            <button className="button is-success new__button" onClick={()=>history.push(`/edit/${id}`)}>Edit</button>  
           </div>
         </div>
       </div>
