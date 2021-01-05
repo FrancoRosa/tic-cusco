@@ -232,8 +232,8 @@ const AdminEdit = ({ products, setProducts }) => {
               <tr>
                 <th>Descripción:</th>
                 <td>
-                  <input
-                    className="input" required
+                  <textarea
+                    className="textarea" required
                     type="text" value={description}
                     onChange={e=> setDescription(e.target.value)}
                   />
