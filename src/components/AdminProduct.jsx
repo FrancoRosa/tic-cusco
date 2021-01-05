@@ -40,7 +40,7 @@ const AdminProduct = ({ products }) => {
       
       <div className="container">
         <div className="card product__card">
-          <table className="table">
+          <table className="table product__table">
             <tbody>
               <tr><th>Descripcion:</th> <td>{description}</td></tr>
               <tr><th>Categorias:</th> <td>{categories.join(', ')}</td></tr>

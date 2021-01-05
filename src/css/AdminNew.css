@@ -12,3 +12,13 @@
 .new__form {
   padding: 1em;
 }
+
+.new__image {
+  height: 100px;
+  width: auto;
+  margin: 1em;
+}
+
+.new__table {
+  width: 100%;
+}

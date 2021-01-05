@@ -143,72 +143,100 @@ const AdminNew = () => {
     { !success ?
       <div className="container">
         <div className="card new__form">
-          <form action="">
-            <label>Descripcion</label>
-            <input
-              className="input"
-              type="text" value={description}
-              onChange={e=> setDescription(e.target.value)}
-            />
-            <hr/>
-            <label>Categorias</label>
-            <p>{categories.join(', ')}</p>
-            <input 
-              className="input"
-              type="text" value={category}
-              onChange={e=> setCategory(e.target.value)}
-              placeholder="teclado"
-            />
-            <button className="button is-link" onClick={addCategory}>Añadir categoria</button>
-            <hr/>
-            <label>Stock</label>
-            <input 
-              className="input"
-              type="number" value={stock}
-              onChange={e=> setStock(e.target.value)}
-            />
-            
-            <label>Precio de Lista</label>
-            <input 
-              className="input"
-              type="number" value={listprice}
-              onChange={e=> setListPrice(e.target.value)}
-            />
-            
-            <label>Precio</label>
-            <input 
-              className="input"
-              type="number" value={price}
-              onChange={e=> setPrice(e.target.value)}
-            />
-            
-            <label>Destacar</label>
-            <input 
-              type="checkbox" value={highlight}
-              onChange={e=>setHighlight(e.target.checked)}
-            />
-            <br/>
-            <label>Listar</label>
-            <input 
-              type="checkbox" value={list}
-              onChange={e=> setList(e.target.checked)}
-            />
-            <hr/>
-            
-            <label>Añadir imagenes: </label>
-            <br/>
-            <input 
-              type="file" onChange={e=> setImage(e.target.files[0])}
-            />
-            { images.length > 0 && <button className="button is-danger" onClick={removeImage}>Borrar Imagen</button> }
-            <button className="button is-link" onClick={addImage}>Añadir Imagen</button>
-            
-            <br/>
-            <hr/>
-            <h6>Imagenes seleccionadas:</h6>
-            {images.map(img => <img src={URL.createObjectURL(img)} alt=""/>)}
-            <br />
-          </form>
+          <table className="table new__table">
+            <tbody>
+              <tr>
+                <th>Descripción:</th>
+                <td>
+                  <input
+                    className="input"
+                    type="text" value={description}
+                    onChange={e=> setDescription(e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>Categorias:</th>
+                <td>
+                  <p>{categories.join(', ')}</p>
+                  <input 
+                    className="input"
+                    type="text" value={category}
+                    onChange={e=> setCategory(e.target.value)}
+                    placeholder="teclado"
+                  />
+                  <button className="button is-link" onClick={addCategory}>Añadir categoria</button>
+                </td>
+              </tr>
+              <tr>
+                <th>Stock:</th>
+                <td>
+                  <input 
+                    className="input"
+                    type="number" value={stock}
+                    onChange={e=> setStock(e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>Precio de Lista:</th>
+                <td>
+                  <input 
+                    className="input"
+                    type="number" value={listprice}
+                    onChange={e=> setListPrice(e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>Precio:</th>
+                <td>
+                  <input 
+                    className="input"
+                    type="number" value={price}
+                    onChange={e=> setPrice(e.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>Destacar:</th>
+                <td>
+                  <input 
+                    type="checkbox" value={highlight}
+                    onChange={e=>setHighlight(e.target.checked)}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>Listar:</th>
+                <td>
+                  <input 
+                    type="checkbox" value={highlight}
+                    onChange={e=>setList(e.target.checked)}
+                  /></td>
+              </tr>
+              <tr>
+                <th>Imagenes:</th>
+                <td>
+                  <input 
+                    type="file" onChange={e=> setImage(e.target.files[0])}
+                  />
+                  <button className="button is-link" onClick={addImage}>Añadir Imagen</button>
+                </td>
+              </tr>
+              <tr>
+                <th>Imagenes seleccionadas ({images.length}):</th>
+                <td>
+                  {images.map(img => <img className="new__image" src={URL.createObjectURL(img)} alt=""/>)}
+                  { 
+                    images.length > 0
+                    &&
+                    <button className="button is-danger" onClick={removeImage}>Borrar Imagen</button>
+                  }
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
       </div> :
