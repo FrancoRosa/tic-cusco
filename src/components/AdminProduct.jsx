@@ -18,27 +18,45 @@ const AdminProduct = ({ products }) => {
   } = products.filter(product => product.id === params.id)[0];
   return (
     <div>
+      <div className="navbar dashboard__nav">
+        <div className="navbar-brand">
+          <h1
+            className="title is-3 dashboard__title"
+            onClick={() => history.push('/')}
+          >
+            tic-cusco
+          </h1>
+        </div>
+        <div className="navbar-menu">
+          <div className="navbar-start new__title">
+            <h1 className="title is-6">Detalles de producto</h1>
+          </div>
+          <div className="navbar-end">
+            <button className="button is-link new__button" onClick={()=>history.push('/dashboard')}>Regresar</button>  
+            <button className="button is-success new__button" onClick={()=>history.push(`/edit/${id}`)}>Edit</button>  
+          </div>
+        </div>
+      </div>
       
       <div className="container">
-      <div>
-        <p><strong>Descripcion: </strong>{description}</p>
-        <p><strong>Categorias: </strong>{categories.join(', ')}</p>
-        <p><strong>Destacado: </strong>{highlight ? 'si': 'no'}</p>
-        <p><strong>Listado: </strong>{list ? 'si': 'no'}</p>
-        <p><strong>Stock: </strong>{stock}</p>
-        <p><strong>Precio de Lista: </strong>{listprice}</p>
-        <p><strong>Precio: </strong>{price}</p>
-        <br />
-        <h5>Imagenes({urls.length})</h5>
-        {
-          urls.length > 0
-          &&
-          urls.map(img => <img src={img} alt=""/>)
-        }
+        <div className="card product__card">
+          <table className="table">
+            <tbody>
+              <tr><th>Descripcion:</th> <td>{description}</td></tr>
+              <tr><th>Categorias:</th> <td>{categories.join(', ')}</td></tr>
+              <tr><th>Destacado:</th> <td>{highlight ? 'si': 'no'}</td></tr>
+              <tr><th>Listado:</th> <td>{list ? 'si': 'no'}</td></tr>
+              <tr><th>Stock:</th> <td>{stock}</td></tr>
+              <tr><th>Precio de Lista:</th> <td>{listprice}</td></tr>
+              <tr><th>Precio:</th> <td>{price}</td></tr>
+              <tr>
+                <th>Imagenes ({urls.length}):</th>
+                <td>{urls.map(img => <img src={img} alt="" className="product__img"/>)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <button onClick={()=>history.push('/dashboard')}>Regresar</button>  
-      <button onClick={()=>history.push(`/edit/${id}`)}>Edit</button>  
-    </div>
     </div>
   );
 }

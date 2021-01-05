@@ -1,0 +1,10 @@
+.product__card {
+  padding: 1em;
+  margin: 1em 0;
+}
+
+.product__img {
+  width: auto;
+  height: 100px;
+  border: solid 1px lightgray;
+}
