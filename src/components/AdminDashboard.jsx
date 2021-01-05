@@ -8,6 +8,7 @@ const ProductPreview = ({ product }) => {
   const [hover, setHover] = useState(false);
   const {
     id,
+    title,
     description,
     categories,
     stock,
@@ -26,6 +27,7 @@ const ProductPreview = ({ product }) => {
       onMouseEnter={()=>setHover(true)}
       onMouseLeave={()=>setHover(false)}
     >
+      <td>{title}</td>
       <td>{description}</td>
       <td>{categories.join(', ')}</td>
       <td>{highlight ? 'si': 'no'}</td>
@@ -84,6 +86,7 @@ const AdminDashboard = ({ products }) => {
         <table className="card table is-striped dashboard__table">
           <thead>
             <tr>
+              <th>Titulo</th>
               <th>Descripcion</th>
               <th>Categorias</th>
               <th>Destacado</th>

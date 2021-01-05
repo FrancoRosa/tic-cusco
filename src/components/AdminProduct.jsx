@@ -7,6 +7,7 @@ const AdminProduct = ({ products }) => {
   const history = useHistory();  
   const {
     id,
+    title,
     description,
     categories,
     stock,
@@ -42,6 +43,7 @@ const AdminProduct = ({ products }) => {
         <div className="card product__card">
           <table className="table product__table">
             <tbody>
+              <tr><th>Titulo:</th> <td>{title}</td></tr>
               <tr><th>Descripcion:</th> <td>{description}</td></tr>
               <tr><th>Categorias:</th> <td>{categories.join(', ')}</td></tr>
               <tr><th>Destacado:</th> <td>{highlight ? 'si': 'no'}</td></tr>

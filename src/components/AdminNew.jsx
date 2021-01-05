@@ -7,6 +7,7 @@ import { setProducts } from '../actions';
 
 const AdminNew = ({setProducts}) => {
   const history = useHistory();
+  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]);
@@ -46,6 +47,7 @@ const AdminNew = ({setProducts}) => {
     if (description && (categories.length > 0)){
       Promise.all(promises).then(()=>{
       db.collection('products').add({
+        title,
         description,
         categories,
         stock,
@@ -155,7 +157,7 @@ const AdminNew = ({setProducts}) => {
           <button
             className="button new__button is-success"
             onClick={saveProduct}
-            disabled={description === '' || categories.length === 0} 
+            disabled={title === '' || description === '' || categories.length === 0} 
           >
             Guardar
           </button>
@@ -168,12 +170,23 @@ const AdminNew = ({setProducts}) => {
         <table className="table new__table">
           <tbody>
             <tr>
-              <th>Descripción:</th>
+              <th>Titulo:</th>
               <td>
                 <input
                   className="input" required
+                  type="text" value={title}
+                  onChange={e=> setTitle(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Descripción:</th>
+              <td>
+                <textarea
+                  className="textarea" required
                   type="text" value={description}
                   onChange={e=> setDescription(e.target.value)}
+                  placeholder="Descripcion del producto"
                 />
               </td>
             </tr>
@@ -190,7 +203,7 @@ const AdminNew = ({setProducts}) => {
                   className="input" required
                   type="text" value={category}
                   onChange={e=> setCategory(e.target.value)}
-                  placeholder="teclado"
+                  placeholder="Escribe una categoria. Luego, presiona añadir "
                 />
                 <button className="button is-success new__button is-small" onClick={addCategory}>Añadir categoria</button>
               </td>
@@ -245,9 +258,6 @@ const AdminNew = ({setProducts}) => {
             <tr>
               <th>Imagenes:</th>
               <td>
-                {/* <input 
-                  type="file" onChange={e=> setImage(e.target.files[0])}
-                /> */}
                 <div class="file">
                   <label class="file-label is-small">
                     <input class="file-input" type="file" onChange={e=> setImage(e.target.files[0])} />

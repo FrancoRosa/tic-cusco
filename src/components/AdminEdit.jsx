@@ -9,6 +9,7 @@ const AdminEdit = ({ products, setProducts }) => {
   const history = useHistory();
   const product = products.filter(product => product.id === params.id)[0]
 
+  const [title, setTitle] = useState(product.title);
   const [description, setDescription] = useState(product.description);
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState(product.categories);
@@ -51,6 +52,7 @@ const AdminEdit = ({ products, setProducts }) => {
       console.log('urls');
       console.log(urls);
       db.collection('products').doc(product.id).set({
+        title,
         description,
         categories,
         stock,
@@ -202,8 +204,10 @@ const AdminEdit = ({ products, setProducts }) => {
         <div className="navbar-end">
           <button className="button is-danger new__button" onClick={removeProduct}>Eliminar</button>
           <button 
-            className={`button new__button ${description && categories.length > 0 ? 'is-success' : 'is-light'}`}
+            className="button new__button is-success"
             onClick={saveProduct}
+            disabled={title === '' || description === '' || categories.length === 0} 
+
           >
             Guardar
           </button>
@@ -215,6 +219,16 @@ const AdminEdit = ({ products, setProducts }) => {
         <div className="card new__form">
           <table className="table new__table">
             <tbody>
+              <tr>
+                <th>Titulo:</th>
+                <td>
+                  <input
+                    className="input" required
+                    type="text" value={title}
+                    onChange={e=> setTitle(e.target.value)}
+                  />
+                </td>
+              </tr>
               <tr>
                 <th>Descripción:</th>
                 <td>
