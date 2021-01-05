@@ -2,8 +2,9 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { db, storage } from '../firebase';
 import { connect } from 'react-redux';
+import { setProducts } from '../actions';
 
-const AdminEdit = ({ products }) => {
+const AdminEdit = ({ products, setProducts }) => {
   const params = useParams();
   const history = useHistory();
   const product = products.filter(product => product.id === params.id)[0]
@@ -21,6 +22,22 @@ const AdminEdit = ({ products }) => {
   const [savedimgs, setSavedimgs] = useState(product.urls);
   let urls = [];
 
+
+  const getProducts = (event, id) => {
+    console.log('... reading products from Firebase')
+    const allProducts = [];
+    db.collection('products').get()
+    .then(query => {
+      console.log('... saving data on redux store')
+      query.forEach(doc => allProducts.push({ ...doc.data(), id: doc.id }));
+      setProducts(allProducts);
+      event.target.classList.remove('is-loading')
+      history.push(`/dashboard/${id}`)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  }
 
   const saveProduct = async event => {
     event.preventDefault();
@@ -45,15 +62,15 @@ const AdminEdit = ({ products }) => {
       })
       .then(() => {
         console.log('...productSaved');
-        event.target.classList.remove('is-loading')
-        history.push(`/dashboard/${product.id}`)
+        getProducts(event, product.id);
       })
       .catch(error =>{
         event.target.classList.remove('is-loading')
         console.error('...was it an error?');
         console.error(error.message);
       });
-    })
+    });
+    
   }
 
   const saveImage = (file) => { 
@@ -157,6 +174,7 @@ const AdminEdit = ({ products }) => {
       .then(()=>{
         e.target.classList.remove('is-loading')
         console.log('Product Deleted')
+        getProducts(e);
         history.push('/dashboard')
       })
       .catch(error=>{
@@ -326,4 +344,8 @@ const mapStateToProps = state => ({
   products: state.products,
 });
 
-export default connect(mapStateToProps)(AdminEdit);
+const mapDispatchToProps = dispatch => ({
+  setProducts: products => dispatch(setProducts(products)),
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(AdminEdit);

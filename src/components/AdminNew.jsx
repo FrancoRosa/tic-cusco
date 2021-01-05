@@ -2,8 +2,10 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { db, storage } from '../firebase';
 import '../css/AdminNew.css';
+import { connect } from 'react-redux';
+import { setProducts } from '../actions';
 
-const AdminNew = () => {
+const AdminNew = ({setProducts}) => {
   const history = useHistory();
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
@@ -15,9 +17,24 @@ const AdminNew = () => {
   const [list, setList] = useState(false);
   const [image, setImage] = useState(null);
   const [images, setImages] = useState([]);
-  const [success, setSuccess] = useState(false);
   let urls = [];
 
+
+  const getProducts = (event, id) => {
+    console.log('... reading products from Firebase')
+    const allProducts = [];
+    db.collection('products').get()
+    .then(query => {
+      console.log('... saving data on redux store')
+      query.forEach(doc => allProducts.push({ ...doc.data(), id: doc.id }));
+      setProducts(allProducts);
+      event.target.classList.remove('is-loading')
+      history.push(`/dashboard/${id}`)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  }
 
   const saveProduct = async event => {
     event.preventDefault();
@@ -38,9 +55,8 @@ const AdminNew = () => {
         list,
         urls,
       })
-      .then(() => {
-        event.target.classList.remove('is-loading')
-        history.push('/dashboard')
+      .then(docRef => {
+        getProducts(event, docRef.id)
       })
       .catch(error =>{
         event.target.classList.remove('is-loading')
@@ -119,10 +135,6 @@ const AdminNew = () => {
     setImage(null);
   }
 
-  const successTimer = () => {
-    setTimeout(history.push('/dashboard'), 1000)
-  }
-
   return(
   <div className="new">
     <div className="navbar dashboard__nav">
@@ -141,8 +153,9 @@ const AdminNew = () => {
         </div>
         <div className="navbar-end">
           <button
-            className={`button new__button ${description && categories.length > 0 ? 'is-success' : 'is-light'}`}
+            className="button new__button is-success"
             onClick={saveProduct}
+            disabled={description === '' || categories.length === 0} 
           >
             Guardar
           </button>
@@ -150,133 +163,129 @@ const AdminNew = () => {
         </div>
       </div>
     </div>
-
-    { !success ?
-      <div className="container">
-        <div className="card new__form">
-          <table className="table new__table">
-            <tbody>
-              <tr>
-                <th>Descripción:</th>
-                <td>
-                  <input
-                    className="input" required
-                    type="text" value={description}
-                    onChange={e=> setDescription(e.target.value)}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <th>Categorias ({categories.length}):</th>
-                <td>
-                  <p>{categories.join(', ')}</p>
-                  {
-                    categories.length > 0 
-                    && 
-                    <button className="button is-danger is-small new__button" onClick={removeCategory}>Borrar categoria</button>
-                  }
-                  <input 
-                    className="input" required
-                    type="text" value={category}
-                    onChange={e=> setCategory(e.target.value)}
-                    placeholder="teclado"
-                  />
-                  <button className="button is-success new__button is-small" onClick={addCategory}>Añadir categoria</button>
-                </td>
-              </tr>
-              <tr>
-                <th>Stock:</th>
-                <td>
-                  <input 
-                    className="input"
-                    type="number" value={stock}
-                    onChange={e=> setStock(e.target.value)}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <th>Precio de Lista:</th>
-                <td>
-                  <input 
-                    className="input"
-                    type="number" value={listprice}
-                    onChange={e=> setListPrice(e.target.value)}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <th>Precio:</th>
-                <td>
-                  <input 
-                    className="input"
-                    type="number" value={price}
-                    onChange={e=> setPrice(e.target.value)}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <th>Destacar:</th>
-                <td>
-                  <input 
-                    type="checkbox" value={highlight}
-                    onChange={e=>setHighlight(e.target.checked)}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <th>Listar:</th>
-                <td>
-                  <input 
-                    type="checkbox" value={highlight}
-                    onChange={e=>setList(e.target.checked)}
-                  /></td>
-              </tr>
-              <tr>
-                <th>Imagenes:</th>
-                <td>
-                  {/* <input 
-                    type="file" onChange={e=> setImage(e.target.files[0])}
-                  /> */}
-                  <div class="file">
-                    <label class="file-label is-small">
-                      <input class="file-input" type="file" onChange={e=> setImage(e.target.files[0])} />
-                      <span class="file-cta">
-                        <span class="file-icon">
-                          <i class="fas fa-upload"></i>
-                        </span>
-                        <span class="file-label">
-                          {image ? image.name : 'Buscar imagen ...'}
-                        </span>
+    <div className="container">
+      <div className="card new__form">
+        <table className="table new__table">
+          <tbody>
+            <tr>
+              <th>Descripción:</th>
+              <td>
+                <input
+                  className="input" required
+                  type="text" value={description}
+                  onChange={e=> setDescription(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Categorias ({categories.length}):</th>
+              <td>
+                <p>{categories.join(', ')}</p>
+                {
+                  categories.length > 0 
+                  && 
+                  <button className="button is-danger is-small new__button" onClick={removeCategory}>Borrar categoria</button>
+                }
+                <input 
+                  className="input" required
+                  type="text" value={category}
+                  onChange={e=> setCategory(e.target.value)}
+                  placeholder="teclado"
+                />
+                <button className="button is-success new__button is-small" onClick={addCategory}>Añadir categoria</button>
+              </td>
+            </tr>
+            <tr>
+              <th>Stock:</th>
+              <td>
+                <input 
+                  className="input"
+                  type="number" value={stock}
+                  onChange={e=> setStock(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Precio de Lista:</th>
+              <td>
+                <input 
+                  className="input"
+                  type="number" value={listprice}
+                  onChange={e=> setListPrice(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Precio:</th>
+              <td>
+                <input 
+                  className="input"
+                  type="number" value={price}
+                  onChange={e=> setPrice(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Destacar:</th>
+              <td>
+                <input 
+                  type="checkbox" value={highlight}
+                  onChange={e=>setHighlight(e.target.checked)}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Listar:</th>
+              <td>
+                <input 
+                  type="checkbox" value={highlight}
+                  onChange={e=>setList(e.target.checked)}
+                /></td>
+            </tr>
+            <tr>
+              <th>Imagenes:</th>
+              <td>
+                {/* <input 
+                  type="file" onChange={e=> setImage(e.target.files[0])}
+                /> */}
+                <div class="file">
+                  <label class="file-label is-small">
+                    <input class="file-input" type="file" onChange={e=> setImage(e.target.files[0])} />
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fas fa-upload"></i>
                       </span>
-                    </label>
-                  </div>
-                  {image && <img className="new__image" src={URL.createObjectURL(image)} alt=""/>}
-                  <br/>
-                  {image && <button className="button is-success is-small new__button" onClick={addImage}>Añadir Imagen</button>}
-                </td>
-              </tr>
-              <tr>
-                <th>Imagenes seleccionadas ({images.length}):</th>
-                <td>
-                  {images.map(img => <img className="new__image" src={URL.createObjectURL(img)} alt=""/>)}
-                  { 
-                    images.length > 0
-                    &&
-                    <button className="button is-danger new__button is-small" onClick={removeImage}>Borrar Imagen</button>
-                  }
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div> :
-      <div className="container">
-        {successTimer()}
-        Producto guardado, redireccinando...
+                      <span class="file-label">
+                        {image ? image.name : 'Buscar imagen ...'}
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                {image && <img className="new__image" src={URL.createObjectURL(image)} alt=""/>}
+                <br/>
+                {image && <button className="button is-success is-small new__button" onClick={addImage}>Añadir Imagen</button>}
+              </td>
+            </tr>
+            <tr>
+              <th>Imagenes seleccionadas ({images.length}):</th>
+              <td>
+                {images.map(img => <img className="new__image" src={URL.createObjectURL(img)} alt=""/>)}
+                { 
+                  images.length > 0
+                  &&
+                  <button className="button is-danger new__button is-small" onClick={removeImage}>Borrar Imagen</button>
+                }
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    }
+    </div>
   </div>
 )};
 
-export default AdminNew;
+const mapDispatchToProps = dispatch => ({
+  setProducts: products => dispatch(setProducts(products)),
+});
+
+export default connect(null, mapDispatchToProps)(AdminNew);
