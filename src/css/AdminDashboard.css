@@ -33,3 +33,14 @@
 .dashboard__title {
   cursor: pointer;
 }
+
+.dashboard__fields {
+  padding: 1em auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.dashboard__fields > span {
+  cursor: pointer;
+}
