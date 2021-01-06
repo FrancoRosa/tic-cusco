@@ -24,3 +24,12 @@
 .new__table {
   width: 100%;
 }
+
+.new__fields {
+  padding: 0.2em;
+}
+
+.new__fields > span{
+  margin: 0.2em;
+  cursor: pointer;
+}

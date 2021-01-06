@@ -5,7 +5,7 @@ import '../css/AdminNew.css';
 import { connect } from 'react-redux';
 import { setProducts } from '../actions';
 
-const AdminNew = ({setProducts}) => {
+const AdminNew = ({setProducts, products}) => {
   const history = useHistory();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -107,6 +107,22 @@ const AdminNew = ({setProducts}) => {
     });
   };
 
+  const savedCategories = (products) => {
+    const result = [];
+    products.forEach(product => product.categories.forEach(category => {
+      if(!result.includes(category)) result.push(category);
+    }))
+    return result.sort();
+  }
+
+  const savedBrands = (products) => {
+    const result = [];
+    products.forEach(product => {
+      if(product.brand && !result.includes(product.brand)) result.push(product.brand);
+    })
+    return result.sort();
+  }
+
   const addCategory = event => {
     event.preventDefault();
     if (category !== '') {
@@ -139,6 +155,11 @@ const AdminNew = ({setProducts}) => {
     setImage(null);
   }
 
+  const toggleCategory = event => {
+    event.target.classList.add('is-dark')
+    setCategories([...categories, event.target.innerText])
+  }
+  
   return(
   <div className="new">
     <div className="navbar dashboard__nav">
@@ -195,6 +216,9 @@ const AdminNew = ({setProducts}) => {
             <tr>
               <th>Marca:</th>
               <td>
+                <div className="new__fields">
+                  {savedBrands(products).map(brand => <span className="tag" onClick={e=>setBrand(e.target.innerText)}>{brand}</span>)}
+                </div>
                 <input
                   className="input" required
                   type="text" value={brand}
@@ -206,6 +230,9 @@ const AdminNew = ({setProducts}) => {
             <tr>
               <th>Categorias ({categories.length}):</th>
               <td>
+                <div className="new__fields">
+                  {savedCategories(products).map(category => <span className="tag" onClick={toggleCategory}>{category}</span>)}
+                </div>
                 <p>{categories.join(', ')}</p>
                 {
                   categories.length > 0 
@@ -315,8 +342,12 @@ const AdminNew = ({setProducts}) => {
   </div>
 )};
 
+const mapStateToProps = state => ({
+  products: state.products,
+})
+
 const mapDispatchToProps = dispatch => ({
   setProducts: products => dispatch(setProducts(products)),
 });
 
-export default connect(null, mapDispatchToProps)(AdminNew);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminNew);
