@@ -115,7 +115,7 @@ const AdminDashboard = ({ products }) => {
           <span className={`tag ${fields.price ? "is-dark" : "is-light"}`} id="price" onClick={toogleField}>Precio</span>
           <span className={`tag ${fields.highlight ? "is-dark" : "is-light"}`} id="highlight" onClick={toogleField}>Destacado</span>
           <span className={`tag ${fields.list ? "is-dark" : "is-light"}`} id="list" onClick={toogleField}>Listado</span>
-          <span className={`tag ${fields.urls ? "is-dark" : "is-light"}`} id="urls" onClick={toogleField}>Descripcion</span>
+          <span className={`tag ${fields.urls ? "is-dark" : "is-light"}`} id="urls" onClick={toogleField}>Imagenes</span>
         </div>
         <table className="card table is-striped dashboard__table">
           <thead>
