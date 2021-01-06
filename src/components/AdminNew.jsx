@@ -9,6 +9,7 @@ const AdminNew = ({setProducts}) => {
   const history = useHistory();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [brand, setBrand] = useState('');
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]);
   const [stock, setStock] = useState(0);
@@ -49,6 +50,7 @@ const AdminNew = ({setProducts}) => {
       db.collection('products').add({
         title,
         description,
+        brand,
         categories,
         stock,
         listprice,
@@ -191,19 +193,38 @@ const AdminNew = ({setProducts}) => {
               </td>
             </tr>
             <tr>
+              <th>Marca:</th>
+              <td>
+                <input
+                  className="input" required
+                  type="text" value={brand}
+                  onChange={e=> setBrand(e.target.value)}
+                  placeholder="Por ejemplo kingston (siempre en minusculas)"
+                />
+              </td>
+            </tr>
+            <tr>
               <th>Categorias ({categories.length}):</th>
               <td>
                 <p>{categories.join(', ')}</p>
                 {
                   categories.length > 0 
                   && 
-                  <button className="button is-danger is-small new__button" onClick={removeCategory}>Borrar categoria</button>
+                  <button
+                    type="button"
+                    className="button is-danger is-small new__button"
+                    onClick={removeCategory}
+                  >
+                    Borrar categoria
+                  </button>
                 }
+                
                 <input 
                   className="input" required
                   type="text" value={category}
                   onChange={e=> setCategory(e.target.value)}
                   placeholder="Escribe una categoria. Luego, presiona añadir "
+                  onKeyUp={e=>{if (e.key==='Enter') addCategory(e)}}
                 />
                 <button className="button is-success new__button is-small" onClick={addCategory}>Añadir categoria</button>
               </td>

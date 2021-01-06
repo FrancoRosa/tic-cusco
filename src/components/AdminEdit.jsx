@@ -11,7 +11,9 @@ const AdminEdit = ({ products, setProducts }) => {
 
   const [title, setTitle] = useState(product.title);
   const [description, setDescription] = useState(product.description);
+  const [brand, setBrand] = useState(product.brand);
   const [category, setCategory] = useState('');
+
   const [categories, setCategories] = useState(product.categories);
   const [stock, setStock] = useState(product.stock);
   const [listprice, setListPrice] = useState(product.listprice);
@@ -53,6 +55,7 @@ const AdminEdit = ({ products, setProducts }) => {
       console.log(urls);
       db.collection('products').doc(product.id).set({
         title,
+        brand,
         description,
         categories,
         stock,
@@ -240,19 +243,33 @@ const AdminEdit = ({ products, setProducts }) => {
                 </td>
               </tr>
               <tr>
+                <th>Marca:</th>
+                <td>
+                  <input
+                    className="input" required
+                    type="text" value={brand}
+                    onChange={e=> setBrand(e.target.value)}
+                    placeholder="Por ejemplo kingston (siempre en minusculas)"
+                  />
+                </td>
+              </tr>
+              <tr>
                 <th>Categorias ({categories.length}):</th>
                 <td>
+                
                   <p>{categories.join(', ')}</p>
                   {
                     categories.length > 0 
                     && 
                     <button className="button is-danger is-small new__button" onClick={removeCategory}>Borrar categoria</button>
                   }
-                  <input 
+                  <input
+                    options={['uno','dos','tres','cuatro']} 
                     className="input" required
                     type="text" value={category}
                     onChange={e=> setCategory(e.target.value)}
                     placeholder="teclado"
+                    onKeyUp={e=>{if (e.key==='Enter') addCategory(e)}}
                   />
                   <button className="button is-success new__button is-small" onClick={addCategory}>Añadir categoria</button>
                 </td>

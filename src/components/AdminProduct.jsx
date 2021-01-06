@@ -9,6 +9,7 @@ const AdminProduct = ({ products }) => {
     id,
     title,
     description,
+    brand, 
     categories,
     stock,
     listprice,
@@ -45,6 +46,7 @@ const AdminProduct = ({ products }) => {
             <tbody>
               <tr><th>Titulo:</th> <td>{title}</td></tr>
               <tr><th>Descripcion:</th> <td>{description}</td></tr>
+              <tr><th>Marca:</th> <td>{brand}</td></tr>
               <tr><th>Categorias ({categories.length}):</th> <td>{categories.join(', ')}</td></tr>
               <tr><th>Destacado:</th> <td>{highlight ? 'si': 'no'}</td></tr>
               <tr><th>Listado:</th> <td>{list ? 'si': 'no'}</td></tr>

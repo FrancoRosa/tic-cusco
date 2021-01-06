@@ -83,6 +83,9 @@ const AdminDashboard = ({ products }) => {
           <p><strong>Total: </strong> {products.length} productos</p>
           <p><strong>Resultados: </strong> {categoryFilter(products,filter).length} productos</p>
         </div>
+        <div className="card dashboard__fields">
+          <button classNamegit >Titulo</button>
+        </div>
         <table className="card table is-striped dashboard__table">
           <thead>
             <tr>
