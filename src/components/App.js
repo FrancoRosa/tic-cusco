@@ -54,6 +54,10 @@ const App = ({ user, setUser, products, setProducts }) => {
             <AdminNew />
           </Route>
           
+          <Route path="/dashboard/undefined">
+            <AdminDashboard />
+          </Route>
+
           <Route path="/dashboard/:id">
             <AdminProduct />
           </Route>
