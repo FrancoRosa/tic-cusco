@@ -15,10 +15,13 @@ import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise'
 const useStyles = makeStyles({
   root: {
     maxWidth: 300,
-    margin: "2rem",
+    minWidth: 250,
+    height: 400,
+    margin: "1rem",
   },
   media: {
-    height: 140,
+    height: 240,
+    padding: "1rem",
   },
   actions: {
     display: "flex",
@@ -42,11 +45,11 @@ const HomeProduct = ({ product }) => {
         <CardMedia
           className={classes.media}
           image={urls[0]}
-          title="Contemplative Reptile"
+          title={title}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            <span>s/. </span>{`${price}.00`}
+            <span>S/. </span>{`${price}.00`}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {title}
@@ -57,6 +60,7 @@ const HomeProduct = ({ product }) => {
         className={classes.actions}
       >
         <Button 
+          style={{textTransform: 'none'}}
           variant="outlined" size="small" color="black"
           onClick={() => addToBasket(product)}
         >

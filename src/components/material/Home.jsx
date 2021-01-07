@@ -10,7 +10,8 @@ const Home = ({ products }) => {
       direction="row"
       justify="center"
       alignItems="center"
-      spacing={2}
+      spacing={1}
+      style={{backgroundColor: "#ebebeb",}}
     >
       {products.map(product => <HomeProduct product={product} />)}
     </Grid>
