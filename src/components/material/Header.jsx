@@ -171,6 +171,7 @@ export default function PrimarySearchAppBar() {
               maxHeight: "3rem",
               width: "auto",
               height: "auto",
+              cursor: "pointer",
             }}
           />
           <div className={classes.search}>
@@ -187,8 +188,8 @@ export default function PrimarySearchAppBar() {
             />
           </div>
           <div className={classes.grow} />
-          <Button color="inherit">Crea tu cuenta</Button>
-          <Button color="inherit">Ingresa</Button>
+          <Button style={{textTransform: 'none'}} color="inherit">Crea tu cuenta</Button>
+          <Button style={{textTransform: 'none'}} color="inherit">Ingresa</Button>
           <IconButton color="inherit">
             <Badge badgeContent={1} color="secondary">
               <NotificationsNoneOutlinedIcon />

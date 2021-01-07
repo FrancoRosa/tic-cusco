@@ -1,9 +1,24 @@
-const Home = () => {
+import { Grid } from '@material-ui/core';
+import HomeProduct from './HomeProduct';
+import { connect } from 'react-redux';
+
+
+const Home = ({ products }) => {
   return(
-    <div>
-      ass
-    </div>
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      spacing={2}
+    >
+      {products.map(product => <HomeProduct product={product} />)}
+    </Grid>
   )
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  products: state.products
+})
+
+export default connect(mapStateToProps)(Home);
