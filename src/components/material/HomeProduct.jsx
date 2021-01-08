@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import cx from 'clsx';
 import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise'
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles({
   }
 });
 
-const HomeProduct = ({ product }) => {
+const HomeProduct = ({ product, addToBasket }) => {
   const {
     id,
     title,
@@ -40,18 +41,26 @@ const HomeProduct = ({ product }) => {
   const classes = useStyles();
   const shadowStyles = useSoftRiseShadowStyles();
   return (
-    <Card className={cx(classes.root, shadowStyles.root)}>
+    <Card className={cx(classes.root, shadowStyles.root)}
+    >
       <CardActionArea>
         <CardMedia
           className={classes.media}
           image={urls[0]}
           title={title}
-        />
+          />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             <span>S/. </span>{`${price}.00`}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" color="textSecondary" component="p"
+            style={{
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            onMouseEnter={e=>console.log(e)}
+          >
             {title}
           </Typography>
         </CardContent>
@@ -59,7 +68,8 @@ const HomeProduct = ({ product }) => {
       <CardActions 
         className={classes.actions}
       >
-        <Button 
+        <Button
+          startIcon={<AddIcon />}
           style={{textTransform: 'none'}}
           variant="outlined" size="small" color="black"
           onClick={() => addToBasket(product)}
@@ -72,9 +82,8 @@ const HomeProduct = ({ product }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addToBasket: item => {
-    dispatch(addToBasket(item));
-  },
+  addToBasket: item => dispatch(addToBasket(item)),
+
 });
 
 export default connect(null, mapDispatchToProps)(HomeProduct);

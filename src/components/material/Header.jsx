@@ -17,7 +17,8 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { setFilter } from '../../actions';
-
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -82,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ basket, user, setFilter }) => {
+const Header = ({ basket, user, setFilter, products }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -164,6 +165,17 @@ const Header = ({ basket, user, setFilter }) => {
     </Menu>
   );
 
+  const getOptions = products => {
+    const options = [];
+    products.forEach(product => {
+      if (!options.includes(product.brand)) options.push(product.brand)
+      product.categories.forEach(category => {
+        if (!options.includes(category)) options.push(category)
+      })
+    })
+    return options;
+  }
+
   return (
     <div className={classes.grow}>
       <AppBar position="static" color="transparent">
@@ -181,16 +193,32 @@ const Header = ({ basket, user, setFilter }) => {
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <InputBase
-              placeholder="Buscar producto, marca..."
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={e => setFilter(e.target.value)}
+            <Autocomplete
+              options={getOptions(products)}
+              id="debug"
+              debug
+              renderInput={(params) =>
+                <InputBase
+                  {...params}
+                  placeholder="Buscar producto, marca..."
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                  onChange={e => setFilter(e.target.value)}
+                />
+              }
             />
+
+          {/* <Autocomplete
+            options={getOptions(products)}
+            id="debug"
+            debug
+            renderInput={(params) => <TextField {...params} label="Buscar" margin="normal" placeholder="Buscar producto, marca"/>}
+          /> */}
           </div>
+
           <div className={classes.grow} />
           <Button style={{textTransform: 'none'}} color="inherit">Crea tu cuenta</Button>
           <Button style={{textTransform: 'none'}} color="inherit">Ingresa</Button>
@@ -200,7 +228,7 @@ const Header = ({ basket, user, setFilter }) => {
             </Badge>
           </IconButton>
           <IconButton color="inherit">
-            <Badge badgeContent={5} color="secondary">
+            <Badge badgeContent={basket.reduce((sum, item)=> sum + item.count ,0)} color="secondary">
               <ShoppingCartOutlinedIcon />
             </Badge>
           </IconButton>
@@ -231,6 +259,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   basket: state.basket,
+  products: state.products,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
