@@ -4,6 +4,7 @@ export const DELETE_FROM_BASKET = 'DELETE_FROM_BASKET';
 export const SET_USER = 'SET_USER';
 export const SET_ADMIN = 'SET_ADMIN';
 export const SET_PRODUCTS = 'SET_PRODUCTS';
+export const SET_FILTER = 'SET_FILTER';
 
 export const addToBasket = item => (
   {
@@ -44,5 +45,12 @@ export const setProducts = products => (
   {
     products,
     type: SET_PRODUCTS,
+  }
+);
+
+export const setFilter = filter => (
+  {
+    filter,
+    type: SET_FILTER,
   }
 );

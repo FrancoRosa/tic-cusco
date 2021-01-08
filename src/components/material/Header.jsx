@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,6 +15,8 @@ import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneO
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { Button } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { setFilter } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -79,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+const Header = ({ basket, user, setFilter }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -185,6 +188,7 @@ export default function PrimarySearchAppBar() {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={e => setFilter(e.target.value)}
             />
           </div>
           <div className={classes.grow} />
@@ -220,3 +224,13 @@ export default function PrimarySearchAppBar() {
     </div>
   );
 }
+
+const mapDispatchToProps = dispatch => ({
+  setFilter: filter => dispatch(setFilter(filter)),
+});
+
+const mapStateToProps = state => ({
+  basket: state.basket,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -3,12 +3,14 @@ import basket from './basket';
 import user from './user';
 import admin from './admin';
 import products from './products';
+import filter from './filter';
 
 const rootReducer = combineReducers({
   admin,
   basket,
   user,
   products,
+  filter,
 });
 
 const store = createStore(
