@@ -1,7 +1,7 @@
 import { Grid } from '@material-ui/core';
 import HomeProduct from './HomeProduct';
 import { connect } from 'react-redux';
-
+import HomeCarrousel from './HomeCarrousel';
 
 const categoryFilter = (products, filter) => {
   if (filter.length <= 1) {
@@ -14,16 +14,19 @@ const categoryFilter = (products, filter) => {
 
 const Home = ({ products, filter }) => {
   return(
-    <Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-      style={{backgroundColor: "#ebebeb",}}
-    >
-      {categoryFilter(products, filter).map(product => <HomeProduct product={product} />)}
-    </Grid>
+    <div>
+      <HomeCarrousel />
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+        style={{backgroundColor: "#ebebeb",}}
+      >
+        {categoryFilter(products, filter).map(product => <HomeProduct product={product} />)}
+      </Grid>
+    </div>
   )
 }
 
