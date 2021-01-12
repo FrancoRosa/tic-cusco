@@ -16,6 +16,7 @@ import AdminEdit from './AdminEdit';
 import { auth } from '../firebase';
 import { setProducts, setUser } from '../actions';
 import { db } from '../firebase';
+import Footer from './material/Footer';
 
 
 
@@ -93,6 +94,7 @@ const App = ({ user, setUser, products, setProducts }) => {
           <Route path="/">
             <Header user={user} />
             <Home />
+            <Footer/>
           </Route>
 
         </Switch>

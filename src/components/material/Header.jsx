@@ -17,7 +17,6 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { setFilter } from '../../actions';
-import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -177,7 +176,7 @@ const Header = ({ basket, user, setFilter, products }) => {
   }
 
   return (
-    <div className={classes.grow}>
+    <header className={classes.grow}>
       <AppBar position="static" color="transparent">
         <Toolbar>
           <img alt="logo" src="/img/logo.png"
@@ -249,7 +248,7 @@ const Header = ({ basket, user, setFilter, products }) => {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-    </div>
+    </header>
   );
 }
 
