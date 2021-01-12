@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import cx from 'clsx';
 import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise'
 import AddIcon from '@material-ui/icons/Add';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -31,7 +32,9 @@ const useStyles = makeStyles({
 });
 
 const HomeProduct = ({ product, addToBasket }) => {
+  const history = useHistory();
   const {
+    id,
     title,
     price,
     urls
@@ -40,7 +43,8 @@ const HomeProduct = ({ product, addToBasket }) => {
   const classes = useStyles();
   const shadowStyles = useSoftRiseShadowStyles();
   return (
-    <Card className={cx(classes.root, shadowStyles.root)}
+    <Card className={cx(classes.root, shadowStyles.root)} 
+      onClick={() => history.push(`/product/${id}`)}
     >
       <CardActionArea>
         <CardMedia

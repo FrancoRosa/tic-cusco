@@ -17,6 +17,7 @@ import { auth } from '../firebase';
 import { setProducts, setUser } from '../actions';
 import { db } from '../firebase';
 import Footer from './material/Footer';
+import ProductPage from './material/ProductPage';
 
 
 
@@ -89,6 +90,12 @@ const App = ({ user, setUser, products, setProducts }) => {
           <Route path="/payment">
             <Header user={user}/>
             <Payment />
+          </Route>
+
+          <Route path="/product/:id">
+            <Header user={user} />
+            <ProductPage />
+            <Footer/>
           </Route>
 
           <Route path="/">

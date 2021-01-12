@@ -9,6 +9,8 @@ const HomeCarrousel = () => {
       showThumbs={false}
       infiniteLoop={true}
       autoPlay={true}
+      showStatus={false}
+      transitionTime={500}
     >
       <div>
         <img className="carousel__img"
