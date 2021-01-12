@@ -10,6 +10,7 @@ const HomeCarrousel = () => {
       infiniteLoop={true}
       autoPlay={true}
       showStatus={false}
+      showIndicators={false}
       transitionTime={1000}
       interval={4000}
 

@@ -22,7 +22,7 @@ const Home = ({ products, filter }) => {
         justify="center"
         alignItems="center"
         spacing={1}
-        style={{backgroundColor: "#ebebeb",}}
+        style={{backgroundColor: "#ebebeb", marginTop: "-3rem"}}
       >
         {categoryFilter(products, filter).map(product => <HomeProduct product={product} />)}
       </Grid>

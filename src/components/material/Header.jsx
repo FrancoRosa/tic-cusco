@@ -233,8 +233,11 @@ const Header = ({ basket, user, setFilter, products }) => {
               <NotificationsNoneOutlinedIcon />
             </Badge>
           </IconButton>
-          <IconButton color="inherit">
-            <Badge badgeContent={basket.reduce((sum, item)=> sum + item.count ,0)} color="secondary">
+          <IconButton color="inherit" onClick={()=>history.push('/checkout')}>
+            <Badge 
+              badgeContent={basket.reduce((sum, item)=> sum + item.count ,0)} 
+              color="secondary"
+            >
               <ShoppingCartOutlinedIcon />
             </Badge>
           </IconButton>

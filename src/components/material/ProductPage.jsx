@@ -4,7 +4,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import { useEffect, useState } from "react";
 import './css/ProductPage.css';
-const ProductPage = ({ products }) => {
+import { Button } from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
+import { addToBasket } from '../../actions';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import StorefrontIcon from '@material-ui/icons/Storefront';
+
+const ProductPage = ({ products, addToBasket }) => {
   const params = useParams();
   const history = useHistory();  
   const [product, setProduct] = useState({
@@ -57,8 +63,8 @@ const ProductPage = ({ products }) => {
       >
           {product.urls.map(url=> <div className="productpage__img"><img src={url} alt=""/></div>)}
       </Carousel>
-      <div className="container">
-        <div className="card product__card">
+      <div className="">
+        <div className="">
           <table className="table product__table">
             <tbody>
               <tr><th>Titulo:</th> <td>{product.title}</td></tr>
@@ -69,6 +75,32 @@ const ProductPage = ({ products }) => {
               <tr><th>Precio:</th> <td>{product.price}</td></tr>
             </tbody>
           </table>
+          <div className="productpage__actions">
+            <Button
+              startIcon={<AddIcon />}
+              style={{textTransform: 'none'}}
+              variant="outlined" color="black"
+              onClick={() => addToBasket(product)}
+            >
+              Añadir al carrito
+            </Button>
+            <Button
+              startIcon={<StorefrontIcon />}
+              style={{textTransform: 'none'}}
+              variant="outlined" color="black"
+              onClick={() => history.push('/')}
+            >
+              Regresar al catalogo
+            </Button>
+            <Button
+              startIcon={<ShoppingCart />}
+              style={{textTransform: 'none'}}
+              variant="outlined" color="black"
+              onClick={() => history.push('/checkout')}
+            >
+              Ver carrito
+            </Button>
+          </div>
         </div>
       </div>
     </div>
@@ -77,6 +109,10 @@ const ProductPage = ({ products }) => {
 
 const mapStateToProps = state => ({
   products: state.products
-})
+});
 
-export default connect(mapStateToProps)(ProductPage);
+const mapDispatchToProps = dispatch => ({
+  addToBasket: item => dispatch(addToBasket(item)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);
