@@ -32,7 +32,6 @@ const useStyles = makeStyles({
 
 const HomeProduct = ({ product, addToBasket }) => {
   const {
-    id,
     title,
     price,
     urls

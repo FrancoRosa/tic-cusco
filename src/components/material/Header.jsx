@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   search: {
+    flexGrow: 1,
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
@@ -59,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
     color: 'inherit',
   },
   inputInput: {
+    flexGrow: 1,
+    borderRadius: "5px",
+    border: "solid 1px lightgray",
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
@@ -218,7 +222,7 @@ const Header = ({ basket, user, setFilter, products }) => {
           /> */}
           </div>
 
-          <div className={classes.grow} />
+          {/* <div className={classes.grow} /> */}
           <Button style={{textTransform: 'none'}} color="inherit">Crea tu cuenta</Button>
           <Button style={{textTransform: 'none'}} color="inherit">Ingresa</Button>
           <IconButton color="inherit">
