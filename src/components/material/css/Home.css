@@ -1,0 +1,8 @@
+.home__noresult {
+  height: 50vh;
+  margin: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

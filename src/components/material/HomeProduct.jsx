@@ -54,7 +54,7 @@ const HomeProduct = ({ product, addToBasket }) => {
           />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            <span>S/. </span>{`${price}.00`}
+            <span>S/. </span>{price ? `${price}.00` : ''}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p"
             style={{

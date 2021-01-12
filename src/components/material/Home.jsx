@@ -1,7 +1,8 @@
 import { Grid } from '@material-ui/core';
-import HomeProduct from './HomeProduct';
 import { connect } from 'react-redux';
+import HomeProduct from './HomeProduct';
 import HomeCarrousel from './HomeCarrousel';
+import './css/Home.css'
 
 const categoryFilter = (products, filter) => {
   if (filter.length <= 1) {
@@ -10,6 +11,19 @@ const categoryFilter = (products, filter) => {
     const filtered = products.filter(product => product.categories.reduce((r,w) => r || w.includes(filter.toLowerCase()), false))
     return filtered;
   }
+}
+
+const NoResults = () => {
+  return(
+    <div className="home__noresult">
+      <p>
+        No se encontraron resultados
+      </p>
+      <p>
+        Intenta con otra palabra
+      </p>
+    </div>
+  )
 }
 
 const Home = ({ products, filter }) => {
@@ -25,6 +39,7 @@ const Home = ({ products, filter }) => {
         style={{backgroundColor: "#ebebeb", marginTop: "-3rem"}}
       >
         {categoryFilter(products, filter).map(product => <HomeProduct product={product} />)}
+        {categoryFilter(products, filter).length === 0 && <NoResults />}
       </Grid>
     </div>
   )
