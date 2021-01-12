@@ -1,0 +1,17 @@
+.product__page{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2rem;
+}
+
+.productpage__img{
+  height: 70vh;
+}
+
+.productpage__img > img{
+  display: block;
+  max-width:40vw;
+  max-height:60vh;
+  width: auto;
+  height: auto;
+}

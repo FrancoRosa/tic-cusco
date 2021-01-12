@@ -18,6 +18,7 @@ import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { setFilter } from '../../actions';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -88,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = ({ basket, user, setFilter, products }) => {
   const classes = useStyles();
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -184,6 +186,7 @@ const Header = ({ basket, user, setFilter, products }) => {
       <AppBar position="static" color="transparent">
         <Toolbar>
           <img alt="logo" src="/img/logo.png"
+            onClick={()=>history.push('/')}
             style={{
               display: "block",
               maxHeight: "3rem",

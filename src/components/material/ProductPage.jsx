@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { useEffect, useState } from "react";
-
+import './css/ProductPage.css';
 const ProductPage = ({ products }) => {
   const params = useParams();
   const history = useHistory();  
@@ -49,29 +49,13 @@ const ProductPage = ({ products }) => {
   }, [products])
 
   return (
-    <div>
-      <Carousel 
-        showThumbs={false}
-        infiniteLoop={true}
-        autoPlay={true}
+    <div className="product__page">
+      <Carousel infiniteLoop autoPlay
         showStatus={false}
-        transitionTime={500}
+        transitionTime={1000}
+        interval={8000}
       >
-        <div>
-          <img className="carousel__img"
-            src="img/banner1.png" alt=""
-          />
-        </div>
-        <div>
-          <img className="carousel__img"
-            src="img/banner2.png" alt=""
-          />
-        </div>
-        <div>
-          <img className="carousel__img"
-            src="img/banner3.png" alt=""
-          />
-        </div>
+          {product.urls.map(url=> <div className="productpage__img"><img src={url} alt=""/></div>)}
       </Carousel>
       <div className="container">
         <div className="card product__card">
@@ -83,10 +67,6 @@ const ProductPage = ({ products }) => {
               <tr><th>Categorias ({product.categories.length}):</th> <td>{product.categories.join(', ')}</td></tr>
               <tr><th>Stock:</th> <td>{product.stock}</td></tr>
               <tr><th>Precio:</th> <td>{product.price}</td></tr>
-              <tr>
-                <th>Imagenes ({product.urls.length}):</th>
-                <td>{product.urls.map(img => <img src={img} alt="" className="product__img"/>)}</td>
-              </tr>
             </tbody>
           </table>
         </div>

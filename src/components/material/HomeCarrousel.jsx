@@ -10,7 +10,9 @@ const HomeCarrousel = () => {
       infiniteLoop={true}
       autoPlay={true}
       showStatus={false}
-      transitionTime={500}
+      transitionTime={1000}
+      interval={4000}
+
     >
       <div>
         <img className="carousel__img"
