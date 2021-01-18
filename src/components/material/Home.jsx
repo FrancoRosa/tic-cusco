@@ -8,7 +8,12 @@ const categoryFilter = (products, filter) => {
   if (filter.length <= 1) {
     return products;
   } else {
-    const filtered = products.filter(product => product.categories.reduce((r,w) => r || w.includes(filter.toLowerCase()), false))
+    const byCategory = products.filter(product => product.categories.reduce((r,w) => r || w.includes(filter.toLowerCase()), false))
+    const byBrand = products.filter(product => product.brand.toLowerCase().includes(filter.toLowerCase()));
+    const filtered = byCategory
+    byBrand.forEach(product => {
+      if(!filtered.includes(product)) filtered.push(product)      
+    })
     return filtered;
   }
 }
@@ -20,7 +25,7 @@ const NoResults = () => {
         No se encontraron resultados
       </p>
       <p>
-        Intenta con otra palabra
+        Intenta con otro producto o marca
       </p>
     </div>
   )

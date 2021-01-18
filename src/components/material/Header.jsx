@@ -210,6 +210,8 @@ const Header = ({ basket, user, setFilter, products }) => {
               trigger=""
               spacer=""
               onChange={text => setFilter(text)}
+              Component="input"
+              placeHolder="Buscar por producto o marca..."
             />
           </div>
           <Button style={{textTransform: 'none'}} color="inherit">Crea tu cuenta</Button>

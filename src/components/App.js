@@ -31,6 +31,7 @@ const App = ({ user, setUser, products, setProducts }) => {
     .then(query => {
       console.log('... saving data on redux store')
       query.forEach(doc => allProducts.push({ ...doc.data(), id: doc.id }));
+      console.log(allProducts)
       setProducts(allProducts);
     })
     .catch(error => {
