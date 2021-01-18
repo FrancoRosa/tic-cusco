@@ -1,5 +1,4 @@
-import React from 'react';
-
+import { useState } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -21,6 +20,8 @@ import { setFilter } from '../../actions';
 import { useHistory } from 'react-router-dom';
 import TextInput from 'react-autocomplete-input';
 import 'react-autocomplete-input/dist/bundle.css';
+import './css/Header.css';
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -93,9 +94,9 @@ const Header = ({ basket, user, setFilter, products }) => {
   const classes = useStyles();
   const history = useHistory();
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [input, setInput] = useState('');
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -205,34 +206,12 @@ const Header = ({ basket, user, setFilter, products }) => {
             </div>
             <TextInput 
               options={getOptions(products)}
-              className="heather__input"
+              className="header__input"
               trigger=""
-              value=
-              onChange={e => setFilter(e.target.value)}
-
+              spacer=""
+              onChange={text => setFilter(text)}
             />
-            
-            {/* <Autocomplete
-              options={getOptions(products)}
-              id="debug"
-              debug
-              renderInput={(params) =>
-                <InputBase
-                  {...params}
-                  placeholder="Buscar producto, marca..."
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ 'aria-label': 'search' }}
-                  onChange={e => setFilter(e.target.value)}
-                />
-              }
-            /> */}
-
           </div>
-
-          {/* <div className={classes.grow} /> */}
           <Button style={{textTransform: 'none'}} color="inherit">Crea tu cuenta</Button>
           <Button style={{textTransform: 'none'}} color="inherit">Ingresa</Button>
           <IconButton color="inherit">

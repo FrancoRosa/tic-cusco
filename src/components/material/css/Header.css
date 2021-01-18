@@ -1,0 +1,23 @@
+.header__input{
+  flex-grow: 1;
+  width: 100%;
+  border-radius: 5px;
+  padding: 1rem 3rem 0;
+  border: solid 1px lightgray;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: 1rem;
+}
+
+ul.react-autocomplete-input{
+  margin-top: 1.5rem;
+  border-radius: 5px;
+}
+ul.react-autocomplete-input > li{
+  border-radius: 5px;
+
+}
+ul.react-autocomplete-input > li.active{
+  background-color: lightgray;
+  color: black;
+}
