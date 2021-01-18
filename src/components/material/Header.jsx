@@ -4,7 +4,7 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import InputBase from '@material-ui/core/InputBase';
+// import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -17,8 +17,10 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { setFilter } from '../../actions';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+// import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useHistory } from 'react-router-dom';
+import TextInput from 'react-autocomplete-input';
+import 'react-autocomplete-input/dist/bundle.css';
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -90,8 +92,10 @@ const useStyles = makeStyles((theme) => ({
 const Header = ({ basket, user, setFilter, products }) => {
   const classes = useStyles();
   const history = useHistory();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const 
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -199,7 +203,16 @@ const Header = ({ basket, user, setFilter, products }) => {
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <Autocomplete
+            <TextInput 
+              options={getOptions(products)}
+              className="heather__input"
+              trigger=""
+              value=
+              onChange={e => setFilter(e.target.value)}
+
+            />
+            
+            {/* <Autocomplete
               options={getOptions(products)}
               id="debug"
               debug
@@ -215,14 +228,8 @@ const Header = ({ basket, user, setFilter, products }) => {
                   onChange={e => setFilter(e.target.value)}
                 />
               }
-            />
+            /> */}
 
-          {/* <Autocomplete
-            options={getOptions(products)}
-            id="debug"
-            debug
-            renderInput={(params) => <TextField {...params} label="Buscar" margin="normal" placeholder="Buscar producto, marca"/>}
-          /> */}
           </div>
 
           {/* <div className={classes.grow} /> */}
