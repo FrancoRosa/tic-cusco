@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import HomeProduct from './HomeProduct';
 import HomeCarrousel from './HomeCarrousel';
 import './css/Home.css'
+import HomePromo from './HomePromo';
 
 const categoryFilter = (products, filter) => {
   if (filter.length <= 1) {
@@ -43,7 +44,7 @@ const Home = ({ products, filter }) => {
   return(
     <div className="home__container">
       {filter.length <= 1 ?
-        <HomeCarrousel /> :
+        <HomePromo /> :
         <Results items={categoryFilter(products, filter).length}/>
       }
       <Grid
@@ -52,11 +53,12 @@ const Home = ({ products, filter }) => {
         justify="center"
         alignItems="center"
         spacing={1}
-        style={{backgroundColor: "#ebebeb", marginTop: "-3rem"}}
+        style={{backgroundColor: "#ebebeb", marginTop: "0"}}
       >
         {categoryFilter(products, filter).map(product => <HomeProduct product={product} />)}
         {categoryFilter(products, filter).length === 0 && <NoResults />}
       </Grid>
+      <HomeCarrousel />
     </div>
   )
 }

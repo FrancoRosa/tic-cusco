@@ -44,17 +44,16 @@ const HomeProduct = ({ product, addToBasket }) => {
   const classes = useStyles();
   const shadowStyles = useSoftRiseShadowStyles();
   return (
-    <Card className={cx(classes.root, shadowStyles.root)} 
-      onClick={() => history.push(`/product/${id}`)}
-    >
+    <Card className={cx(classes.root, shadowStyles.root)} >
       <CardActionArea>
-        <CardMedia
+        <CardMedia 
           className={classes.media}
           image={urls[0]}
           title={title}
+          onClick={() => history.push(`/product/${id}`)}
         />
         
-        <CardContent>
+        <CardContent onClick={() => history.push(`/product/${id}`)}>
           <Typography gutterBottom variant="body" component="p"
             style={{
               position: 'relative',

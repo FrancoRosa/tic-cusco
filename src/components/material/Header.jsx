@@ -188,7 +188,7 @@ const Header = ({ basket, user, setFilter, products }) => {
 
   return (
     <header className={classes.grow}>
-      <AppBar position="static" color="transparent">
+      <AppBar position="fixed" color="inherit">
         <Toolbar>
           <img alt="logo" src="/img/logo.png"
             onClick={()=>history.push('/')}

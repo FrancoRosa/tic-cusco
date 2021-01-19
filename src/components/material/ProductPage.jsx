@@ -3,12 +3,12 @@ import { useHistory, useParams } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { useEffect, useState } from "react";
-import './css/ProductPage.css';
 import { Button } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import { addToBasket } from '../../actions';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import StorefrontIcon from '@material-ui/icons/Storefront';
+import './css/ProductPage.css';
 
 const ProductPage = ({ products, addToBasket }) => {
   const params = useParams();
@@ -60,47 +60,49 @@ const ProductPage = ({ products, addToBasket }) => {
         showStatus={false}
         transitionTime={1000}
         interval={8000}
+        className="productpage__imgs"
       >
-          {product.urls.map(url=> <div className="productpage__img"><img src={url} alt=""/></div>)}
+        {product.urls.map(url=> 
+          <div >
+            <img
+              className="productpage__img"
+              src={url} alt=""/>
+          </div>
+        )}
       </Carousel>
       <div className="">
-        <div className="">
-          <table className="table product__table">
-            <tbody>
-              <tr><th>Titulo:</th> <td>{product.title}</td></tr>
-              <tr><th>Descripcion:</th> <td>{product.description}</td></tr>
-              <tr><th>Marca:</th> <td>{product.brand}</td></tr>
-              <tr><th>Categorias ({product.categories.length}):</th> <td>{product.categories.join(', ')}</td></tr>
-              <tr><th>Stock:</th> <td>{product.stock}</td></tr>
-              <tr><th>Precio:</th> <td>{product.price}</td></tr>
-            </tbody>
-          </table>
-          <div className="productpage__actions">
-            <Button
-              startIcon={<AddIcon />}
-              style={{textTransform: 'none'}}
-              variant="outlined" color="black"
-              onClick={() => addToBasket(product)}
-            >
-              Añadir al carrito
-            </Button>
-            <Button
-              startIcon={<StorefrontIcon />}
-              style={{textTransform: 'none'}}
-              variant="outlined" color="black"
-              onClick={() => history.push('/')}
-            >
-              Regresar al catalogo
-            </Button>
-            <Button
-              startIcon={<ShoppingCart />}
-              style={{textTransform: 'none'}}
-              variant="outlined" color="black"
-              onClick={() => history.push('/checkout')}
-            >
-              Ver carrito
-            </Button>
-          </div>
+        
+        <p>Titulo: {product.title}</p>
+        <p>Descripcion: {product.description}</p>
+        <p>Marca: {product.brand}</p>
+        <p>Categorias ({product.categories.length}): {product.categories.join(', ')}</p>
+        <p>Stock: {product.stock}</p>
+        <p>Precio: {product.price}</p>
+        <div className="productpage__actions">
+          <Button
+            startIcon={<AddIcon />}
+            style={{textTransform: 'none'}}
+            variant="outlined" color="black"
+            onClick={() => addToBasket(product)}
+          >
+            Añadir al carrito
+          </Button>
+          <Button
+            startIcon={<StorefrontIcon />}
+            style={{textTransform: 'none'}}
+            variant="outlined" color="black"
+            onClick={() => history.push('/')}
+          >
+            Regresar al catalogo
+          </Button>
+          <Button
+            startIcon={<ShoppingCart />}
+            style={{textTransform: 'none'}}
+            variant="outlined" color="black"
+            onClick={() => history.push('/checkout')}
+          >
+            Ver carrito
+          </Button>
         </div>
       </div>
     </div>

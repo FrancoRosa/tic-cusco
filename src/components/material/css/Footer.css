@@ -17,6 +17,11 @@
   margin: 0 1rem;
 }
 
+.footer__icon:hover{
+  color: red;
+  padding-bottom: 0.2rem;
+}
+
 .footer__social > *{
   margin: 0 1rem;
   cursor: pointer;

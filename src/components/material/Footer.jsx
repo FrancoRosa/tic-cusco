@@ -24,7 +24,10 @@ const Footer = () => {
         </Link>
       </div>
       <Typography>
-        Tic-Cusco, Cel: +51 984 464086, e-mail: info@tic-cusco.com
+        Tienda de equipos de computo, mantenimiento, reparacion y alquiler
+      </Typography>
+      <Typography>
+        Cel: +51 984 464086, e-mail: info@tic-cusco.com
       </Typography>
       <p>
         Calle Cruz Verde, {' '}
