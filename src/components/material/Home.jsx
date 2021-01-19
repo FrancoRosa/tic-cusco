@@ -31,10 +31,21 @@ const NoResults = () => {
   )
 }
 
+const Results = ({items}) => {
+  return(
+    <div className="home__results">
+      <p>Productos Encontrados ({items})</p>
+    </div>
+  )
+}
+
 const Home = ({ products, filter }) => {
   return(
     <div>
-      <HomeCarrousel />
+      {filter.length <= 1 ?
+        <HomeCarrousel /> :
+        <Results items={categoryFilter(products, filter).length}/>
+      }
       <Grid
         container
         direction="row"
