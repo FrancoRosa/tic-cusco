@@ -41,7 +41,7 @@ const Results = ({items}) => {
 
 const Home = ({ products, filter }) => {
   return(
-    <div>
+    <div className="home__container">
       {filter.length <= 1 ?
         <HomeCarrousel /> :
         <Results items={categoryFilter(products, filter).length}/>

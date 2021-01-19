@@ -37,6 +37,7 @@ const HomeProduct = ({ product, addToBasket }) => {
     id,
     title,
     price,
+    brand,
     urls
   } = product;
 
@@ -51,8 +52,18 @@ const HomeProduct = ({ product, addToBasket }) => {
           className={classes.media}
           image={urls[0]}
           title={title}
-          />
+        />
+        
         <CardContent>
+          <Typography gutterBottom variant="body" component="p"
+            style={{
+              position: 'relative',
+              top: '2rem',
+              color: 'green',
+              textAlign: 'right'
+          }}>
+            {brand}
+          </Typography>
           <Typography gutterBottom variant="h5" component="h2">
             <span>S/. </span>{price ? `${price}.00` : ''}
           </Typography>
