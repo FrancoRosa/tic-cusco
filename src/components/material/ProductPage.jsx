@@ -9,6 +9,7 @@ import { addToBasket } from '../../actions';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import './css/ProductPage.css';
+import Typography from '@material-ui/core/Typography';
 
 const ProductPage = ({ products, addToBasket }) => {
   const params = useParams();
@@ -71,13 +72,37 @@ const ProductPage = ({ products, addToBasket }) => {
         )}
       </Carousel>
       <div className="">
+        <Typography variant="h4" component="h1" className="productpage__title">
+          {product.title}
+        </Typography>
+        <Typography style={{color: 'green'}}> 
+          {product.brand}
+        </Typography>
+        <Typography
+          style={{
+            position: 'relative',
+            top: '-1.5rem',
+            textAlign: 'right',
+          }}  
+        >
+          ({product.stock} unidades) en Stock
+        </Typography>
+        <Typography variant="h5" component="h2"
+          style={{
+            color: 'red'
+          }}
+        >
+          S/. {isNaN(product.price) ? '' : `${parseFloat(product.price).toFixed(2)}`}
+        </Typography>
+        <br />
+        <Typography dangerouslySetInnerHTML={{__html: product.description}} >
+        </Typography>
+        <br />
+        <Typography>
+        <strong>Categorias:</strong> {product.categories.join(', ')}
+        </Typography>
+        <hr />
         
-        <p>Titulo: {product.title}</p>
-        <p>Descripcion: {product.description}</p>
-        <p>Marca: {product.brand}</p>
-        <p>Categorias ({product.categories.length}): {product.categories.join(', ')}</p>
-        <p>Stock: {product.stock}</p>
-        <p>Precio: {product.price}</p>
         <div className="productpage__actions">
           <Button
             startIcon={<AddIcon />}

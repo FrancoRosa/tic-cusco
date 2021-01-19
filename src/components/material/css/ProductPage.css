@@ -22,3 +22,7 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+.productpage__title{
+  border-bottom: solid 1px gray;
+}

@@ -64,7 +64,7 @@ const HomeProduct = ({ product, addToBasket }) => {
             {brand}
           </Typography>
           <Typography gutterBottom variant="h5" component="h2">
-            <span>S/. </span>{price ? `${price}.00` : ''}
+            <span>S/. </span>{isNaN(price) ? '' : `${parseFloat(price).toFixed(2)}`}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p"
             style={{
