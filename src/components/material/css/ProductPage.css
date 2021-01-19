@@ -10,12 +10,15 @@
 .productpage__img {
   max-height:60vh;
   width: auto;
+  background-color: white;
 }
 
 .productpage__imgs {
   display: block;
   width:40vw;
   height:80vh;
+  background-color: white;
+
 }
 
 .productpage__actions{
