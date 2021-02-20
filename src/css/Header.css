@@ -90,3 +90,7 @@ a {
   text-decoration: none;
   color: white;
 }
+
+.header_s__logo {
+  background-color: red;
+}

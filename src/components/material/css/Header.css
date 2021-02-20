@@ -28,3 +28,9 @@ ul.react-autocomplete-input > li.active{
   background-color: lightgray;
   color: black;
 }
+
+.header_s__logo > img {
+  object-fit: contain;
+  height: 1.5em;
+  margin: 0 1em;
+}

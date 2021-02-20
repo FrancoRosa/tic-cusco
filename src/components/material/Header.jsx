@@ -188,6 +188,9 @@ const Header = ({ basket, user, setFilter, products }) => {
 
   return (
     <header className={classes.grow}>
+      <div className="header__contact">
+
+      </div>
       <AppBar position="fixed" color="inherit">
         <Toolbar>
           <img alt="logo" src="/img/logo.png"
@@ -214,13 +217,14 @@ const Header = ({ basket, user, setFilter, products }) => {
               placeHolder="Buscar por producto o marca..."
             />
           </div>
-          <Button style={{textTransform: 'none'}} color="inherit">Crea tu cuenta</Button>
+          <div className="header_s__logo">
+            <img src="/img/flogo.png"/>
+          </div>
+          <div className="header_s__logo">
+            <img src="/img/wlogo.png"/>
+          </div>
           <Button style={{textTransform: 'none'}} color="inherit">Ingresa</Button>
-          <IconButton color="inherit">
-            <Badge badgeContent={1} color="secondary">
-              <NotificationsNoneOutlinedIcon />
-            </Badge>
-          </IconButton>
+          
           <IconButton color="inherit" onClick={()=>history.push('/checkout')}>
             <Badge 
               badgeContent={basket.reduce((sum, item)=> sum + item.count ,0)} 
