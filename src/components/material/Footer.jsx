@@ -32,7 +32,7 @@ const Footer = () => {
       <p>
         Calle Cruz Verde, {' '}
         <span className="footer__high">
-        Centro Comercial El Carmen of. 218, {' '}
+        Centro Comercial El Carmen Of. 101-102 y 218, {' '}
         </span>
         Cusco - Peru
       </p>

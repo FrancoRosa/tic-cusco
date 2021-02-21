@@ -3,7 +3,6 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-// import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -13,14 +12,20 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { setFilter } from '../../actions';
-// import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useHistory } from 'react-router-dom';
 import TextInput from 'react-autocomplete-input';
 import 'react-autocomplete-input/dist/bundle.css';
+import Link from '@material-ui/core/Link';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import RoomIcon from '@material-ui/icons/Room';
+import MessageIcon from '@material-ui/icons/Message';
 import './css/Header.css';
+
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -188,8 +193,11 @@ const Header = ({ basket, user, setFilter, products }) => {
 
   return (
     <header className={classes.grow}>
-      <div className="header__contact">
-
+      <div className="header_float__flogo bounce">
+        <img src="/img/flogo.png"/>
+      </div>
+      <div className="header_float__wlogo bounce">
+        <img src="/img/wlogo.png"/>
       </div>
       <AppBar position="fixed" color="inherit">
         <Toolbar>
@@ -203,6 +211,16 @@ const Header = ({ basket, user, setFilter, products }) => {
               cursor: "pointer",
             }}
           />
+          <div className="header__contact_info">
+            <Link href="http://wa.link/1fjg4y" target="_blank">
+              <WhatsAppIcon className="header__icon" color="disabled"/>
+            </Link>
+            <Typography className="header__contact_text">984 464086</Typography>
+            <Link href="https://g.page/centro-comercial-el-carmen?share" target="_blank">
+              <RoomIcon className="header__icon" color="disabled"/>
+            </Link>
+            <Typography className="header__contact_text">Centro Comercial El Carmen Of. 101-102 y 218</Typography>
+          </div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -217,12 +235,7 @@ const Header = ({ basket, user, setFilter, products }) => {
               placeHolder="Buscar por producto o marca..."
             />
           </div>
-          <div className="header_s__logo">
-            <img src="/img/flogo.png"/>
-          </div>
-          <div className="header_s__logo">
-            <img src="/img/wlogo.png"/>
-          </div>
+          
           <Button style={{textTransform: 'none'}} color="inherit">Ingresa</Button>
           
           <IconButton color="inherit" onClick={()=>history.push('/checkout')}>

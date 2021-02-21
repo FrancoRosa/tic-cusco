@@ -6,7 +6,6 @@
   font-style: inherit;
   font-weight: inherit;
   font-size: 1rem;
-  width: 50%;
   transition: ease-in-out, width .35s ease-in-out;
 }
 
@@ -33,4 +32,84 @@ ul.react-autocomplete-input > li.active{
   object-fit: contain;
   height: 1.5em;
   margin: 0 1em;
+}
+
+.header__contact_info{
+  margin-left: 1em;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.header__icon{
+  margin: 0.1em 0 0 0.3em;
+}
+
+.header__contact_text {
+  color: grey;
+  font-size: .8em !important;
+}
+
+.header_float__flogo > img{
+  object-fit: contain;
+  height: 3em;
+  margin: 0;
+}
+
+.header_float__flogo{
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  z-index: 5;
+  cursor: pointer;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.header_float__wlogo > img{
+  object-fit: contain;
+  height: 3em;
+  margin: 0;
+}
+
+.header_float__wlogo{
+  position: fixed;
+  bottom: 6em;
+  right: 2em;
+  z-index: 4;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+.header_float__wlogo:hover {
+  cursor: pointer;
+  -webkit-animation-play-state: paused;
+  -moz-animation-play-state: paused;
+  -o-animation-play-state: paused;
+  animation-play-state: paused;
+}
+
+.header_float__flogo:hover {
+  cursor: pointer;
+  -webkit-animation-play-state: paused;
+  -moz-animation-play-state: paused;
+  -o-animation-play-state: paused;
+  animation-play-state: paused;
+}
+
+.bounce {
+  animation-name: bounce;
+  animation-timing-function: ease;
+}
+
+
+
+@keyframes bounce {
+  0%   { transform: scale(1,1)      translateY(0); }
+  10%  { transform: scale(1.1,.9)   translateY(0); }
+  30%  { transform: scale(.9,1.1)   translateY(-25px); }
+  50%  { transform: scale(1.05,.95) translateY(0); }
+  57%  { transform: scale(1,1)      translateY(-5px); }
+  64%  { transform: scale(1,1)      translateY(0); }
+  100% { transform: scale(1,1)      translateY(0); }
 }
