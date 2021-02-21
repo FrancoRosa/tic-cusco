@@ -193,11 +193,15 @@ const Header = ({ basket, user, setFilter, products }) => {
 
   return (
     <header className={classes.grow}>
-      <div className="header_float__flogo bounce">
-        <img src="/img/flogo.png"/>
+      <div className="header_float__flogo bounce1">
+        <a href="http://m.me/TecnoligiadeInteligenciaColectiva" target="_blank">
+          <img src="/img/flogo.png"/>
+        </a>
       </div>
       <div className="header_float__wlogo bounce">
-        <img src="/img/wlogo.png"/>
+        <a href="http://wa.link/1fjg4y" target="_blank">
+          <img src="/img/wlogo.png"/>
+        </a>
       </div>
       <AppBar position="fixed" color="inherit">
         <Toolbar>
